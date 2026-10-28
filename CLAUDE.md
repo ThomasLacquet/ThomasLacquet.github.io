@@ -45,6 +45,7 @@ Personal CV website of Thomas Lacquet (research consultant, Haystack Consulting,
 - The owner edits on his PC (`C:\Hackerman\thomas-lacquet-site\site`) and publishes himself with `publiceer.bat` or the panel button. **His folder is the source of truth**: both do `fetch` + `reset --soft origin/main` + commit + push (no rebase, so no conflicts). Therefore every change Claude pushes must ALSO be written to his folder, or his next publish reverts it. He can also ask Claude: then stage his current files, and in the repo clone always `git pull --rebase` before pushing, because he may have pushed. Never commit `Private/`, PDFs or anything with his phone number or home address.
 
 ## Rules
+- Before writing any file to his PC: copy it to the staging folder only after a clean `git pull --rebase` + push, and check it parses (JSON) and contains no `<<<<<<<` conflict markers. Never copy files while a rebase is in progress.
 - Keep it fast: no client-side frameworks on the public page, no external fonts or scripts. Images as WebP or JPG with width and height set, and lazy loading below the fold.
 - Accessibility: real links and buttons, alt text, contrast ≥ 4.5:1, works at 390 px wide, respects `prefers-reduced-motion`.
 - Copy is English. Write like a person: concrete claims, varied sentence length, no clichés, no invented numbers. Missing facts stay as `[PLACEHOLDER]` in capitals.
