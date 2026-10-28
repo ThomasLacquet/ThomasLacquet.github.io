@@ -31,6 +31,10 @@ Personal CV website of Thomas Lacquet (research consultant, Haystack Consulting,
 - He edits `content/*.json` himself through the editor. Before overwriting any of those files on his computer, read his current version and merge it.
 - His local copy lives at `C:\Hackerman\thomas-lacquet-site\site`. He runs `start.bat` (Windows, needs Node ≥ 20.19).
 
+## Publishing
+- Live at https://thomaslacquet.github.io (GitHub Pages, repo `ThomasLacquet/thomaslacquet.github.io`, public). Every push to `main` builds and deploys via `.github/workflows/deploy.yml`.
+- The owner edits on his PC (`C:\Hackerman\thomas-lacquet-site\site`) and has no git there. To publish: stage his current `content/` (and any changed files) from the device, copy them into a clone of the repo, check `npm run build`, commit and push. Never commit `Private/`, PDFs or anything with his phone number or home address.
+
 ## Rules
 - Keep it fast: no client-side frameworks on the public page, no external fonts or scripts. Images as WebP or JPG with width and height set, and lazy loading below the fold.
 - Accessibility: real links and buttons, alt text, contrast ≥ 4.5:1, works at 390 px wide, respects `prefers-reduced-motion`.

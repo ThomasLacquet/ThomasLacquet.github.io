@@ -50,3 +50,6 @@ Na de livegang:
 
 1. Voeg de site toe aan Google Search Console en dien je sitemap in.
 2. Zet de link op je LinkedIn-profiel.
+
+## Online zetten
+De site staat op **https://thomaslacquet.github.io** (gratis via GitHub Pages). Pas je iets aan in de editor, vraag dan aan Claude om het online te zetten: die neemt je bestanden over en publiceert ze. Na ongeveer een minuut staat de nieuwe versie live.
