@@ -52,4 +52,6 @@ Na de livegang:
 2. Zet de link op je LinkedIn-profiel.
 
 ## Online zetten
-De site staat op **https://thomaslacquet.github.io** (gratis via GitHub Pages). Pas je iets aan in de editor, vraag dan aan Claude om het online te zetten: die neemt je bestanden over en publiceert ze. Na ongeveer een minuut staat de nieuwe versie live.
+De site staat op **https://thomaslacquet.github.io** (gratis via GitHub Pages). Pas je iets aan in de editor en ben je tevreden? Dubbelklik op **publiceer.bat**. Het script controleert eerst of de site bouwt en zet hem dan online; na ongeveer een minuut staat de nieuwe versie live.
+
+De eerste keer installeert het (na je akkoord) git en vraagt GitHub je in te loggen in je browser. Daarna gaat het met één dubbelklik. Je kan ook gewoon aan Claude vragen om het online te zetten.

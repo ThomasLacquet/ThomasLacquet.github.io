@@ -4,3 +4,4 @@ dist/
 Private/
 prive/
 *.pdf
+build-log.txt
