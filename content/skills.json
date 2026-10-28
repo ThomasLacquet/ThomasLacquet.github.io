@@ -13,9 +13,7 @@
   "ai": [
     "Claude",
     "ChatGPT",
-    "Gemini",
-    "Synthetic data",
-    "Predictive modelling"
+    "Gemini"
   ],
   "also": [
     "Presenting results to people who don't live in the data",
