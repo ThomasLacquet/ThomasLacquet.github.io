@@ -51,11 +51,11 @@
     ],
     "panelLabel": "Data science & innovation team",
     "panelTitle": "Faster processes, newer methods",
-    "panelText": "Our job: make our internal processes more efficient and keep up with the latest innovations in research. We test new techniques on live client projects and keep what works. Predictive models show which drivers actually move purchase intent, so segmentation and targeting rest on more than averages. Synthetic data lets us explore small or hard-to-reach groups before fieldwork budget goes there. Automatic dashboards in R and Displayr update themselves when a new wave comes in, instead of being rebuilt by hand.",
+    "panelText": "Our job: make our internal processes more efficient and keep up with the latest innovations in research. We test new techniques on live client projects and keep what works. Predictive models show which drivers actually move purchase intent, so segmentation and targeting rest on more than averages. Synthetic data lets us explore small or hard-to-reach groups before fieldwork budget goes there. Dashboards coded in R and Displayr update themselves when a new wave comes in, instead of being rebuilt by hand.",
     "panelTags": [
       "Predictive modelling → key drivers & segments",
       "Synthetic data → hard-to-reach groups",
-      "Automatic dashboards → less manual reporting",
+      "Coded dashboards → less manual reporting",
       "AI tools → faster internal workflows"
     ]
   },
