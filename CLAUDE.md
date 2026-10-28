@@ -34,6 +34,7 @@ Personal CV website of Thomas Lacquet (research consultant, Haystack Consulting,
 - When you set an image path by hand, put the file at exactly that path, or the editor drops the field on the next save.
 
 ## Workflow with the owner
+- **First thing in every session:** read the project doc `claude/pending-pc-sync.md`. It lists changes that are online but not yet in his folder, because his PC was off. Write those to his PC before anything else, then empty the list.
 - For design changes, first show 2–3 options as artboards on his Claude Design canvas ("CV-website Thomas Lacquet"). Implement only the option he picks.
 - He edits `content/*.json` himself through the editor. Before overwriting any of those files on his computer, read his current version and merge it.
 - His local copy lives at `C:\Hackerman\thomas-lacquet-site\site`. He runs `start.bat` (Windows, needs Node ≥ 20.19).
