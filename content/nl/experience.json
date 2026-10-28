@@ -51,12 +51,12 @@
     ],
     "panelLabel": "Data science- en innovatieteam",
     "panelTitle": "Snellere processen, nieuwere methodes",
-    "panelText": "We maken onze interne processen efficiënter en testen nieuwe methodes op echte klantprojecten. Wat werkt, houden we.",
+    "panelText": "In dit team maken we onze interne processen efficiënter en volgen we nieuwe methodes in onderzoek op de voet, zoals predictive modelling en synthetische data. Zelf gebruik ik automatische dashboards in R en Displayr, en AI-tools in mijn dagelijkse werk.",
     "panelTags": [
-      "Predictive modelling → key drivers",
-      "Synthetische data → moeilijke doelgroepen",
       "Automatische dashboards → minder handwerk",
-      "AI-tools → snellere workflows"
+      "AI-tools → snellere workflows",
+      "Op de voet gevolgd: predictive modelling",
+      "Op de voet gevolgd: synthetische data"
     ]
   },
   "jobs": [

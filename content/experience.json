@@ -51,12 +51,12 @@
     ],
     "panelLabel": "Data science & innovation team",
     "panelTitle": "Faster processes, newer methods",
-    "panelText": "We make our internal processes more efficient and test new methods on real client projects. What works, we keep.",
+    "panelText": "In this team we make our internal processes more efficient and stay on top of new methods in research, such as predictive modelling and synthetic data. What I use myself: automatic dashboards in R and Displayr, and AI tools in my daily work.",
     "panelTags": [
-      "Predictive modelling → key drivers",
-      "Synthetic data → hard-to-reach groups",
       "Automatic dashboards → less manual work",
-      "AI tools → faster workflows"
+      "AI tools → faster workflows",
+      "Keeping track of: predictive modelling",
+      "Keeping track of: synthetic data"
     ]
   },
   "jobs": [

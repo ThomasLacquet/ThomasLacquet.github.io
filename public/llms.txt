@@ -10,7 +10,7 @@
 - Study types: product testing, concept testing, usage & attitude (U&A), segmentation, brand health tracking, NPS & customer experience, key driver analysis
 - Specialisms: consumer research, CX and NPS analysis, segmentation analysis, behavioural marketing
 - Runs market research projects end to end: kick-off, methodology, screener, questionnaire, fieldwork follow-up, analysis, insights
-- Member of Haystack's data science & innovation team: makes internal processes more efficient and tests new methods on client projects (predictive modelling for key drivers and segmentation, synthetic data, automatic dashboards in R and Displayr, AI tools such as Claude, ChatGPT, Gemini)
+- Member of Haystack's data science & innovation team: makes internal processes more efficient and keeps track of new research methods (e.g. predictive modelling, synthetic data). Uses automatic dashboards in R and Displayr and AI tools (Claude, ChatGPT, Gemini) in his own work.
 - Recent assignment: CX data analyst at ING Belgium, CoE CX & Innovation (April–June 2026), analysing NPS at bank, channel, product and journey level
 - Tools: SPSS, R, Python, Stata, Displayr, Qlik Sense, Power BI
 - Languages: Dutch (C2), English (C1), French (B2), German (B1)
