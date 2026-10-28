@@ -15,10 +15,13 @@ if %NODEMAJOR%==21 goto :oldnode
 set NEEDINSTALL=
 if not exist node_modules\@keystatic\astro set NEEDINSTALL=1
 if not exist node_modules\qrcode set NEEDINSTALL=1
+rem Eenmalig de editor-buffer vernieuwen na de update van oktober
+if not exist node_modules\.cache-reset-v2 set NEEDINSTALL=1
 if defined NEEDINSTALL (
   echo Onderdelen installeren of bijwerken...
   call npm install --no-audit --no-fund
 )
+if not exist node_modules\.cache-reset-v2 type nul > node_modules\.cache-reset-v2
 rem Open het bedieningspaneel zodra de lokale server klaar is
 start "" /b powershell -NoProfile -WindowStyle Hidden -Command "for($i=0;$i -lt 90;$i++){try{Invoke-WebRequest -UseBasicParsing -TimeoutSec 2 http://localhost:4321/start | Out-Null; Start-Process 'http://localhost:4321/start'; break}catch{Start-Sleep -Milliseconds 700}}"
 echo.
@@ -33,7 +36,8 @@ for /f "usebackq delims=" %%i in (`powershell -NoProfile -Command "(Get-NetIPAdd
 echo  Vraagt Windows om toegang tot het netwerk: kies Prive netwerk en Toestaan.
 echo ============================================================
 echo.
-call npm run dev -- --host
+rem Na een installatie of als de editor wit bleef: tijdelijke bestanden van de editor opnieuw opbouwen
+if defined NEEDINSTALL (call npm run dev -- --host --force) else (call npm run dev -- --host)
 pause
 exit /b
 
