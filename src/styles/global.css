@@ -409,3 +409,7 @@ html[data-titles="big"] .hero h1 { font-size: clamp(2.5rem, 1.5rem + 4.4vw, 4.75
 
 .role-radar { display: grid; gap: 10px; padding-top: 4px; }
 .role-radar strong { font-weight: 600; }
+
+/* Section intro sits right under the title (not floating top right) */
+.sh { flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 12px; }
+.sh p { max-width: 62ch; }
