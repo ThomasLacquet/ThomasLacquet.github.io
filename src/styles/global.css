@@ -320,7 +320,7 @@ h1, h2, h3, h4, p, ul, dl, figure { margin: 0; }
 .hb-chart.on { opacity: .5; transform: none; }
 .hb-seg.on { opacity: 1; }
 .hb-label { font: 500 11px/1 var(--mono); letter-spacing: .08em; opacity: .85; }
-@keyframes hb-in { from { opacity: 0; } to { opacity: 1; } }
+@keyframes hb-in { from { opacity: 0; } }
 @media (max-width: 1100px) {
   .hero-bg { opacity: .6; }
   .hb-chart:not(.hb-seg) { display: none; }
@@ -357,3 +357,9 @@ h1, h2, h3, h4, p, ul, dl, figure { margin: 0; }
 
 /* Sections focused by menu links: no outline box around the whole section */
 section[tabindex="-1"]:focus, footer[tabindex="-1"]:focus, body:focus { outline: none; }
+
+/* Phones and tablets: clusters very faint and slowly drifting, so they never fight the text */
+@keyframes hb-drift { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-10px, 8px); } }
+@media (max-width: 1100px) { .hero-bg { opacity: .35; } .hb-seg g { animation: hb-drift 9s ease-in-out infinite; } .hb-seg g:nth-child(2) { animation-duration: 11s; animation-delay: -3s; } .hb-seg g:nth-child(3) { animation-duration: 13s; animation-delay: -6s; } .hb-seg g:nth-child(4) { animation-duration: 10s; animation-delay: -2s; } }
+@media (max-width: 760px) { .hero-bg { opacity: .14; } }
+@media (prefers-reduced-motion: reduce) { .hb-seg g { animation: none !important; } }
