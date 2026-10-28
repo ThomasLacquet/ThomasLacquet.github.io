@@ -121,10 +121,11 @@ const jsonLd = {
   if (w) {
     var words = w.getAttribute('data-rotate').split('|'), i = 0;
     var charts = (w.getAttribute('data-charts') || '').split('|');
-    var bg = document.querySelector('.hero-bg[data-mode="charts"]');
+    // Background charts (desktop) and the inline chart under the sentence (tablets) switch together
+    var boxes = document.querySelectorAll('[data-mode="charts"]');
     var show = function (k) {
-      if (!bg || !k) return;
-      bg.querySelectorAll('.hb-chart').forEach(function (c) { c.classList.toggle('on', c.getAttribute('data-chart') === k); });
+      if (!k) return;
+      boxes.forEach(function (box) { box.querySelectorAll('.hb-chart').forEach(function (c) { c.classList.toggle('on', c.getAttribute('data-chart') === k); }); });
     };
     setInterval(function () {
       w.classList.add('out');

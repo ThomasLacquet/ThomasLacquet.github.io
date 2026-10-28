@@ -87,6 +87,14 @@ const clusters = (hero.segments ?? []).slice(0, 4).map((s: any, i: number) => {
       )}
     </div>}
 
+    {bgMode === 'charts' && (
+      <div class="hero-inline" data-mode="charts" aria-hidden="true">
+        {[...new Set(wordCharts.filter(Boolean))].map((k) => (
+          <img class:list={['hb-chart', { on: firstChart === k }]} data-chart={k} src={`/charts/${k}.svg`} alt="" width="532" height="444" loading="lazy" decoding="async" />
+        ))}
+      </div>
+    )}
+
     <div class="hero-foot">
       <div class="btns">
         <a class="btn btn-primary btn-mail" href={`mailto:${settings.email}`}><svg class="ico-mail" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>{ui.emailMe}</a>

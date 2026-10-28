@@ -321,7 +321,7 @@ h1, h2, h3, h4, p, ul, dl, figure { margin: 0; }
 .hb-seg.on { opacity: 1; }
 .hb-label { font: 500 11px/1 var(--mono); letter-spacing: .08em; opacity: .85; }
 @keyframes hb-in { from { opacity: 0; } }
-@media (max-width: 1100px) {
+@media (max-width: 899px) {
   .hero-bg { opacity: .6; }
   .hb-chart:not(.hb-seg) { display: none; }
   .hb-seg { opacity: 1; transform: none; }
@@ -349,7 +349,7 @@ h1, h2, h3, h4, p, ul, dl, figure { margin: 0; }
 
 /* Desktop hero: text keeps the left 58% of the content width, the chart stays in the right 40%,
    below the name row, so they never overlap (tested 1101–1920 px). */
-@media (min-width: 1101px) {
+@media (min-width: 900px) {
   .hero .lead, .hero .claim, .hero .hero-foot { max-width: 58%; }
   .hero-bg { right: calc((100vw - min(100vw, var(--wrap))) / 2); width: calc((min(100vw, var(--wrap)) - 2 * var(--gutter)) * 0.40); }
   .hb-chart { inset: 34% 0 6% 0; width: 100%; height: 60%; }
@@ -360,7 +360,7 @@ section[tabindex="-1"]:focus, footer[tabindex="-1"]:focus, body:focus { outline:
 
 /* Phones and tablets: clusters very faint and slowly drifting, so they never fight the text */
 @keyframes hb-drift { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-10px, 8px); } }
-@media (max-width: 1100px) { .hero-bg { opacity: .35; } .hb-seg g { animation: hb-drift 9s ease-in-out infinite; } .hb-seg g:nth-child(2) { animation-duration: 11s; animation-delay: -3s; } .hb-seg g:nth-child(3) { animation-duration: 13s; animation-delay: -6s; } .hb-seg g:nth-child(4) { animation-duration: 10s; animation-delay: -2s; } }
+@media (max-width: 899px) { .hero-bg { opacity: .35; } .hb-seg g { animation: hb-drift 9s ease-in-out infinite; } .hb-seg g:nth-child(2) { animation-duration: 11s; animation-delay: -3s; } .hb-seg g:nth-child(3) { animation-duration: 13s; animation-delay: -6s; } .hb-seg g:nth-child(4) { animation-duration: 10s; animation-delay: -2s; } }
 @media (max-width: 760px) { .hero-bg { opacity: .14; } }
 @media (prefers-reduced-motion: reduce) { .hb-seg g { animation: none !important; } }
 
@@ -413,3 +413,13 @@ html[data-titles="big"] .hero h1 { font-size: clamp(2.5rem, 1.5rem + 4.4vw, 4.75
 /* Section intro sits right under the title (not floating top right) */
 .sh { flex-direction: column; align-items: flex-start; justify-content: flex-start; gap: 12px; }
 .sh p { max-width: 62ch; }
+
+/* Tablets (iPad): the chart switches with the word, shown under the sentence instead of behind the text */
+.hero-inline { display: none; }
+@media (min-width: 761px) and (max-width: 899px) {
+  .hero-bg { display: none; }
+  .hero-inline { display: block; position: relative; width: min(100%, 520px); aspect-ratio: 532 / 300; margin: -4px 0 4px; }
+  .hero-inline .hb-chart { display: block !important; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; object-position: left center; opacity: 0; transform: translateY(10px); transition: opacity .6s ease, transform .6s ease; }
+  .hero-inline .hb-chart.on { opacity: .75; transform: none; }
+}
+@media (prefers-reduced-motion: reduce) { .hero-inline .hb-chart { transition: none; } }
