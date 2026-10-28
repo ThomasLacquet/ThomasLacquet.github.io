@@ -71,6 +71,27 @@ const jsonLd = {
 <a class="skip" href="#main">{ui.skip}</a>
 <slot />
 <script is:inline>
+// Always start at the top: menu links scroll to their section without adding #section to the address,
+// so reloading (or saving in the editor) never jumps down the page.
+(function () {
+  if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+  if (location.hash) { history.replaceState(null, '', location.pathname + location.search); window.scrollTo(0, 0); }
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  document.addEventListener('click', function (e) {
+    var a = e.target.closest && e.target.closest('a[href^="#"]');
+    if (!a || a.classList.contains('skip')) return;
+    var id = a.getAttribute('href').slice(1);
+    var el = id === 'top' ? document.body : document.getElementById(id);
+    if (!el) return;
+    e.preventDefault();
+    if (id === 'top') window.scrollTo({ top: 0, behavior: reduce ? 'auto' : 'smooth' });
+    else el.scrollIntoView({ behavior: reduce ? 'auto' : 'smooth', block: 'start' });
+    if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+    el.focus({ preventScroll: true });
+  });
+})();
+</script>
+<script is:inline>
 (function () {
   // Sticky contact bar: appears once the hero buttons scroll away, hides at the contact section
   var bar = document.querySelector('[data-sticky]');
