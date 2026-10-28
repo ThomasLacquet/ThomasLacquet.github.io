@@ -12,8 +12,9 @@ import education from '../../content/education.json';
 import skills from '../../content/skills.json';
 import about from '../../content/about.json';
 import contact from '../../content/contact.json';
+import extras from '../../content/extras.json';
 
-const en = { settings, hero, logos, experience, work, speaking, education, skills, about, contact };
+const en = { settings, hero, logos, experience, work, speaking, education, skills, about, contact, extras };
 type Content = typeof en;
 
 // Dutch files are optional: a missing file falls back to English.
@@ -23,7 +24,7 @@ const nlRaw: Record<string, any> = Object.fromEntries(
 );
 
 // Keys that are never translated: they always come from the English file.
-const SHARED = new Set(['photo', 'logo', 'logoHeight', 'height', 'image', 'layout', 'color', 'level', 'cv', 'email', 'linkedin', 'accent', 'sections']);
+const SHARED = new Set(['photo', 'logo', 'logoHeight', 'height', 'image', 'layout', 'color', 'level', 'cv', 'email', 'linkedin', 'accent', 'sections', 'theme', 'discriminant', 'style', 'photoPosition']);
 
 // English decides the structure (how many jobs, talks, ...). Dutch fills in the text where it exists.
 function merge(base: any, tr: any): any {
@@ -78,4 +79,7 @@ export const getContent = (l?: string) => {
 };
 
 // Kept for older imports: English content.
-export { settings, hero, logos, experience, work, speaking, education, skills, about, contact };
+export { settings, hero, logos, experience, work, speaking, education, skills, about, contact, extras };
+
+// A switch in the editor counts as ON unless it was explicitly turned off.
+export const isOn = (v: unknown) => v !== false;

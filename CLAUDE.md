@@ -22,6 +22,12 @@ Personal CV website of Thomas Lacquet (research consultant, Haystack Consulting,
 ## Layout controls
 - Each section JSON has a `layout` object (editor group "Layout"): `spacing` (compact/normal/spacious) → `data-space` on the section; hero adds `avatarSize` (s/m/l); about and speaking add `photoPosition` (left/right/top/bottom), `photoSize` (s/m/l), `photoAlign` (top/center/bottom) and `photoFocus` (crop focus). The hero also has `background` (charts/clusters/none) and `segments` (max 4, each max 4 items, drawn as dots, no logos). In `charts` mode each rotating claim word shows its classic chart behind the hero (standalone SVG images in `public/charts/`, loaded as `<img>` so the dummy numbers stay out of the page text,, matched on keywords in `Hero.astro`; segmentation shows the clusters). Below 1100 px and on phones only the faint clusters remain. These are rendered through the `.media-split` and `[data-space]` rules at the end of `global.css`. Add new layout options as select fields in the `layout()` helper, never as free pixel values, so the site stays responsive.
 
+## Editor options (owner-facing)
+- Every section's `layout` has on/off switches (`show*`, default on; `isOn()` in `content.ts` treats missing as on). Settings has `theme` (accent from a fixed accessible palette, background warm/white/cool, text size, title size, sticky bar and language switch on/off) → data attributes on `<html>` in `Base.astro`, styled at the end of `global.css`.
+- Own sections: `content/extras.json` (`sections[]`, each with blocks: text, textPhoto, list, quotes, cards) rendered by `Extra.astro`; placed via `extra1..3` in `settings.sections`; menu name from `navLabel`.
+- The editor menu is generated from `settings.sections` (numbered, page order; hidden sections grouped apart) in `keystatic.config.ts`.
+- Default spacing between sections is compact.
+
 ## Images in the editor
 - Every section has its own image folder (`public/img/<section>/…`, `public/logos/<section>/…`). Keystatic saves a file at `<folder>/<field path>.ext`, e.g. `/logos/speaking/talks/0/logo.webp`. Never point two sections at the same folder, or files overwrite each other.
 - When you set an image path by hand, put the file at exactly that path, or the editor drops the field on the next save.
@@ -36,7 +42,7 @@ Personal CV website of Thomas Lacquet (research consultant, Haystack Consulting,
 
 ## Publishing
 - Live at https://thomaslacquet.github.io (GitHub Pages, repo `ThomasLacquet/thomaslacquet.github.io`, public). Every push to `main` builds and deploys via `.github/workflows/deploy.yml`.
-- The owner edits on his PC (`C:\Hackerman\thomas-lacquet-site\site`) and publishes himself with `publiceer.bat` (git + Git Credential Manager; it builds first, commits, `pull --rebase --autostash`, pushes). He can also ask Claude: then stage his current files, and in the repo clone always `git pull --rebase` before pushing, because he may have pushed. Never commit `Private/`, PDFs or anything with his phone number or home address.
+- The owner edits on his PC (`C:\Hackerman\thomas-lacquet-site\site`) and publishes himself with `publiceer.bat` or the panel button. **His folder is the source of truth**: both do `fetch` + `reset --soft origin/main` + commit + push (no rebase, so no conflicts). Therefore every change Claude pushes must ALSO be written to his folder, or his next publish reverts it. He can also ask Claude: then stage his current files, and in the repo clone always `git pull --rebase` before pushing, because he may have pushed. Never commit `Private/`, PDFs or anything with his phone number or home address.
 
 ## Rules
 - Keep it fast: no client-side frameworks on the public page, no external fonts or scripts. Images as WebP or JPG with width and height set, and lazy loading below the fold.

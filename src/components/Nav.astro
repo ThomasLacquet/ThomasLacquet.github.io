@@ -1,14 +1,16 @@
 ---
-import { getContent } from '../lib/content';
-const { settings, ui, lang } = getContent(Astro.currentLocale);
-const labels = ui.nav;
+import { getContent, isOn } from '../lib/content';
+const { settings, ui, lang, extras } = getContent(Astro.currentLocale);
+// Own sections (extra1..3) use the menu name set in the editor.
+const labels: Record<string, string> = { ...ui.nav };
+(extras.sections ?? []).forEach((x: any, i: number) => { if (x.navLabel) labels[`extra${i + 1}`] = x.navLabel; });
 const links = settings.sections.filter((s) => labels[s]);
 ---
 <header class="nav">
   <nav class="wrap" aria-label={ui.mainNav}>
     <div class="nav-left">
       <a class="brand" href="#top">{settings.name.toUpperCase()}</a>
-      <a class="lang-switch" href={ui.switchHref} hreflang={ui.switchLang} lang={ui.switchLang} aria-label={ui.switchLabel} title={ui.switchLabel}>{ui.switchShort}</a>
+      {isOn((settings as any).theme?.showLanguageSwitch) && <a class="lang-switch" href={ui.switchHref} hreflang={ui.switchLang} lang={ui.switchLang} aria-label={ui.switchLabel} title={ui.switchLabel}>{ui.switchShort}</a>}
     </div>
     <ul>
       {links.map((s) => <li><a href={`#${s}`}>{labels[s]}</a></li>)}

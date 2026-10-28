@@ -8,7 +8,7 @@
   "photo": "/img/about/photo.webp",
   "photoAlt": "Thomas lying in the snow next to his skis, with sunny Alpine slopes behind him",
   "layout": {
-    "spacing": "normal",
+    "spacing": "compact",
     "photoPosition": "right",
     "photoSize": "m",
     "photoAlign": "center",

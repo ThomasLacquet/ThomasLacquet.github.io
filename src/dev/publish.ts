@@ -16,16 +16,26 @@ export const POST: APIRoute = async ({ clientAddress }) => {
   };
   const pending = await pendingChanges();
   if (pending === null) return json({ ok: false, log: 'Deze map is nog niet gekoppeld aan GitHub. Dubbelklik één keer op publiceer.bat, daarna werkt deze knop.' });
+  // Half-finished merge from an older version of this button? Undo it first.
+  const gitDir = (await run('git', ['rev-parse', '--git-dir'])).out || '.git';
+  const { existsSync } = await import('node:fs');
+  if (existsSync(`${gitDir}/rebase-merge`) || existsSync(`${gitDir}/rebase-apply`)) {
+    // quit keeps the files exactly as they are (abort would roll them back)
+    await step('Oude onderbroken poging opruimen', 'git', ['rebase', '--quit']);
+    await run('git', ['add', '-A']);
+    await run('git', ['checkout', '-q', '-B', 'main']);
+  }
   if (!(await step('Site controleren', 'npm', ['run', 'build'], true))) return json({ ok: false, log: log.join('\n') + '\n\nDe site bouwt niet. Er is niets online gezet.' });
+  // This folder is the truth: take the online history, then save exactly what is in the folder on top of it.
+  if (!(await step('Online versie ophalen', 'git', ['fetch', 'origin', 'main']))) return json({ ok: false, log: log.join('\n') + '\n\nGeen verbinding met GitHub.' });
+  await run('git', ['reset', '--soft', 'origin/main']);
   await step('Wijzigingen bundelen', 'git', ['add', '-A']);
   await run('git', ['restore', '--staged', 'package-lock.json']);
   const staged = await run('git', ['diff', '--cached', '--quiet']);
-  if (staged.code !== 0) {
-    const d = new Date();
-    await step('Opslaan', 'git', ['commit', '-m', `Update via bedieningspaneel (${d.toLocaleDateString('nl-BE')} ${d.toLocaleTimeString('nl-BE', { hour: '2-digit', minute: '2-digit' })})`]);
-  } else log.push('Geen nieuwe aanpassingen, ik haal wel de laatste online versie op.');
-  if (!(await step('Laatste online versie ophalen', 'git', ['pull', '--rebase', '--autostash', 'origin', 'main']))) return json({ ok: false, log: log.join('\n') });
-  if (!(await step('Online zetten', 'git', ['push', 'origin', 'main']))) return json({ ok: false, log: log.join('\n') + '\n\nTip: dubbelklik eens op publiceer.bat, misschien vraagt GitHub om opnieuw in te loggen.' });
+  if (staged.code === 0) return json({ ok: true, log: log.join('\n') + '\nAlles stond al online.' });
+  const d = new Date();
+  await step('Opslaan', 'git', ['commit', '-m', `Update via bedieningspaneel (${d.toLocaleDateString('nl-BE')} ${d.toLocaleTimeString('nl-BE', { hour: '2-digit', minute: '2-digit' })})`]);
+  if (!(await step('Online zetten', 'git', ['push', 'origin', 'HEAD:main']))) return json({ ok: false, log: log.join('\n') + '\n\nTip: dubbelklik eens op publiceer.bat, misschien vraagt GitHub om opnieuw in te loggen.' });
   return json({ ok: true, log: log.join('\n') });
 };
 

@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { getContent } from '../lib/content';
 const { settings: site, ui, lang } = getContent(Astro.currentLocale);
+const theme: any = (site as any).theme ?? {};
 
 const enUrl = new URL('/', Astro.site).href;
 const nlUrl = new URL('/nl/', Astro.site).href;
@@ -37,7 +38,7 @@ const jsonLd = {
 };
 ---
 <!doctype html>
-<html lang={lang} style={`--accent:${site.accent || '#1F5F99'}`}>
+<html lang={lang} data-bg={theme.background || 'warm'} data-text={theme.textSize || 'm'} data-titles={theme.titleSize || 'normal'} style={`--accent:${theme.accent || (site as any).accent || '#1F5F99'}`}>
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">

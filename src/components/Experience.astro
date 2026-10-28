@@ -1,7 +1,8 @@
 ---
-import { getContent } from '../lib/content';
+import { getContent, isOn } from '../lib/content';
 const { experience: e, ui, lang } = getContent(Astro.currentLocale);
 const h = e.haystack;
+const L = e.layout ?? {};
 ---
 <section class="section" data-space={e.layout?.spacing} id="experience" aria-labelledby="exp-title">
   <div class="wrap" data-reveal>
@@ -9,34 +10,34 @@ const h = e.haystack;
       <div><span class="eyebrow">{e.eyebrow}</span><h2 class="h2" id="exp-title">{e.title}</h2></div>
     </div>
 
-    <div class="timeline" data-timeline>
+    <div class:list={["timeline", { "no-line": !isOn(L.showTimeline) }]} data-timeline>
       <article class="job">
         <div class="job-side">
           <span class="meta">{h.period}</span>
-          {h.logo && <img class="org-logo" src={h.logo} alt={h.company.split(' · ')[0]} style={`height:${h.logoHeight || 30}px`} loading="lazy">}
+          {h.logo && isOn(L.showLogos) && <img class="org-logo" src={h.logo} alt={h.company.split(' · ')[0]} style={`height:${h.logoHeight || 30}px`} loading="lazy">}
         </div>
         <div>
           <div><h3 class="h3">{h.title}</h3><p class="sub">{h.company}</p></div>
           <div class="hay">
             <div class="hay-main">
               <p class="job-intro">{h.intro}</p>
-              <ol class="steps" aria-label={ui.howProject}>
+              {isOn(L.showSteps) && <ol class="steps" aria-label={ui.howProject}>
                 {h.steps.map((s, i) => (
                   <li class={i === h.steps.length - 1 ? 'last' : ''}>
                     <span class="step-n">{String(i + 1).padStart(2, '0')}</span>
                     <span><strong>{s.name}</strong>{s.what && <span class="muted"> · {s.what}</span>}</span>
                   </li>
                 ))}
-              </ol>
+              </ol>}
             </div>
-            <div class="ds-card">
+            {isOn(L.showDataScience) && <div class="ds-card">
               <span class="eyebrow">{h.panelLabel}</span>
               <h4>{h.panelTitle}</h4>
               <p>{h.panelText}</p>
               <ul class="ds-tags">{h.panelTags.map((t) => <li>{t}</li>)}</ul>
-            </div>
+            </div>}
           </div>
-          {(h.note || h.studyTypes?.length > 0) && (
+          {isOn(L.showSectors) && (h.note || h.studyTypes?.length > 0) && (
             <div class="study-row">
               {h.note && <p class="study-note">{h.note}</p>}
               {h.studyTypes?.length > 0 && <ul class="study-tags" aria-label={ui.studyTypes}>{h.studyTypes.map((t) => <li>{t}</li>)}</ul>}
@@ -49,7 +50,7 @@ const h = e.haystack;
         <article class="job">
           <div class="job-side">
             <span class="meta">{j.period}</span>
-            {j.logo && <img class="org-logo" src={j.logo} alt={j.company.split(' · ')[0]} style={`height:${j.logoHeight || 30}px`} loading="lazy">}
+            {j.logo && isOn(L.showLogos) && <img class="org-logo" src={j.logo} alt={j.company.split(' · ')[0]} style={`height:${j.logoHeight || 30}px`} loading="lazy">}
           </div>
           <div>
             <div><h3 class="h3">{j.title}</h3>{j.company && <p class="sub">{j.company}</p>}</div>

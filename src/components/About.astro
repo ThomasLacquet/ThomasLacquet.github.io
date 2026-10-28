@@ -1,5 +1,5 @@
 ---
-import { getContent } from '../lib/content';
+import { getContent, isOn } from '../lib/content';
 const { about, ui, lang } = getContent(Astro.currentLocale);
 const L = about.layout ?? {};
 ---
@@ -10,7 +10,7 @@ const L = about.layout ?? {};
       <div class="stack media-text">
         {about.paragraphs.map((p) => <p>{p}</p>)}
       </div>
-      {about.photo && (
+      {about.photo && isOn(L.showPhoto) && (
         <figure class="media">
           <img src={about.photo} width="900" height="840" loading="lazy" alt={about.photoAlt || ''} style={`object-position: 50% ${({ top: '0%', center: '50%', bottom: '100%' } as any)[L.photoFocus] ?? '50%'}`}>
         </figure>

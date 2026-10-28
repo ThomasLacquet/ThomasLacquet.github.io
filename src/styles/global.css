@@ -363,3 +363,31 @@ section[tabindex="-1"]:focus, footer[tabindex="-1"]:focus, body:focus { outline:
 @media (max-width: 1100px) { .hero-bg { opacity: .35; } .hb-seg g { animation: hb-drift 9s ease-in-out infinite; } .hb-seg g:nth-child(2) { animation-duration: 11s; animation-delay: -3s; } .hb-seg g:nth-child(3) { animation-duration: 13s; animation-delay: -6s; } .hb-seg g:nth-child(4) { animation-duration: 10s; animation-delay: -2s; } }
 @media (max-width: 760px) { .hero-bg { opacity: .14; } }
 @media (prefers-reduced-motion: reduce) { .hb-seg g { animation: none !important; } }
+
+/* ---------- Look presets (editor: Settings → Look & site-wide options) ---------- */
+html[data-bg="white"] { --bg: #FFFFFF; --band: #F3F4F6; --line: #E3E5E8; }
+html[data-bg="cool"] { --bg: #F1F4F7; --band: #E6EBF0; --line: #D3DAE1; }
+html[data-text="s"] { font-size: 93.75%; }
+html[data-text="l"] { font-size: 106.25%; }
+html[data-titles="compact"] { --step-3: clamp(1.5rem, 1.1rem + 1.6vw, 2.25rem); }
+html[data-titles="big"] { --step-3: clamp(2rem, 1.3rem + 2.8vw, 3.25rem); }
+html[data-titles="compact"] .hero h1 { font-size: clamp(2rem, 1.3rem + 2.8vw, 3.25rem); }
+html[data-titles="big"] .hero h1 { font-size: clamp(2.5rem, 1.5rem + 4.4vw, 4.75rem); }
+.timeline.no-line::before, .timeline.no-line::after, .timeline.no-line .job::before { display: none; }
+.timeline.no-line { padding-left: 0; }
+
+/* ---------- Own sections (building blocks) ---------- */
+.blocks { display: grid; gap: clamp(28px, 4vw, 44px); }
+.blk-text { max-width: 68ch; }
+.extra[data-band="band"] { background: var(--band); padding-bottom: var(--section); }
+.extra[data-band="sand"] { background: #E9E6DE; padding-bottom: var(--section); }
+.extra[data-band="band"][data-space="compact"], .extra[data-band="sand"][data-space="compact"] { padding-bottom: calc(var(--section) * 0.55); }
+.blk-list { display: grid; gap: 12px; }
+.blk-checks { list-style: none; padding-left: 0; }
+.blk-checks li { position: relative; padding-left: 28px; }
+.blk-checks li::before { content: ''; position: absolute; left: 2px; top: .45em; width: 12px; height: 7px; border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(-45deg); }
+.blk-num { padding-left: 1.4em; }
+.blk-quotes blockquote { margin: 0; font: 500 var(--step-1)/1.5 var(--sans); color: var(--ink); }
+.blk-quotes blockquote p::before { content: '“'; } .blk-quotes blockquote p::after { content: '”'; }
+.blk-quotes figcaption { margin-top: 14px; font-size: var(--step--1); }
+.blk-text p + p { margin-top: .8em; }

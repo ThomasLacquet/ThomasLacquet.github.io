@@ -1,5 +1,5 @@
 ---
-import { getContent } from '../lib/content';
+import { getContent, isOn } from '../lib/content';
 const { speaking: s, ui, lang } = getContent(Astro.currentLocale);
 const L = s.layout ?? {};
 // A badge that is a year or a [PLACEHOLDER] shows as plain text, anything else as a dark pill.
@@ -13,10 +13,10 @@ const talks = s.talks.map((t) => ({ ...t, pill: !!t.badge && !/^\d{4}$/.test(t.b
     </div>
 
     <div class="media-split" data-pos={L.photoPosition || 'left'} data-size={L.photoSize || 'm'} data-align={L.photoAlign || 'top'}>
-      {s.photo && (
+      {s.photo && isOn(L.showPhoto) && (
         <figure class="photo media">
           <img src={s.photo} width="610" height="376" loading="lazy" alt={s.photoAlt} style={`object-position: 50% ${({ top: '0%', center: '50%', bottom: '100%' } as any)[L.photoFocus] ?? '50%'}`}>
-          {s.photoCaption && <figcaption class="meta">{s.photoCaption}</figcaption>}
+          {s.photoCaption && isOn(L.showCaption) && <figcaption class="meta">{s.photoCaption}</figcaption>}
         </figure>
       )}
 
@@ -24,13 +24,13 @@ const talks = s.talks.map((t) => ({ ...t, pill: !!t.badge && !/^\d{4}$/.test(t.b
         {talks.map((t) => (
           <div class="row">
             <div class="row-logo">
-              {t.logo && <img src={t.logo} alt="" style={`height:${t.logoHeight || 30}px`} loading="lazy">}
-              {t.badge && (t.pill ? <span class="pill">{t.badge}</span> : <span class="meta">{t.badge}</span>)}
+              {t.logo && isOn(L.showLogos) && <img src={t.logo} alt="" style={`height:${t.logoHeight || 30}px`} loading="lazy">}
+              {t.badge && isOn(L.showBadges) && (t.pill ? <span class="pill">{t.badge}</span> : <span class="meta">{t.badge}</span>)}
             </div>
             <div>
               <h3>{t.title}</h3>
               <p>{t.text}</p>
-              {t.image && <img src={t.image} width="640" height="360" loading="lazy" alt={t.title}>}
+              {t.image && isOn(L.showTalkImages) && <img src={t.image} width="640" height="360" loading="lazy" alt={t.title}>}
             </div>
           </div>
         ))}

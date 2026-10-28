@@ -42,6 +42,6 @@
     }
   ],
   "layout": {
-    "spacing": "normal"
+    "spacing": "compact"
   }
 }

@@ -20,10 +20,14 @@ const qr = phoneUrl ? await QRCode.toString(phoneUrl, { type: 'svg', margin: 1, 
 const pending = await pendingChanges();
 const last = (await run('git', ['log', '-1', '--format=%cd', '--date=format:%d/%m om %H:%M', 'origin/main'])).out;
 
-const sections = [
-  ['hero', 'Bovenaan (hero)'], ['experience', 'Ervaring'], ['skills', 'Skills'], ['speaking', 'Public speaking'],
-  ['education', 'Opleiding'], ['about', 'Personal'], ['contact', 'Contact'], ['settings', 'Volgorde, Google & instellingen'],
-];
+// Same order as the page and the editor menu.
+const names: Record<string, string> = { hero: 'Top', experience: 'Experience', skills: 'Skills', speaking: 'Public speaking', education: 'Education', about: 'Personal', contact: 'Contact', work: 'Work', logos: 'Logos', extras: 'Own sections' };
+const order = ['hero'];
+for (const id of (settings as any).sections ?? []) { const k = /^extra/.test(id) ? 'extras' : id; if (!order.includes(k)) order.push(k); }
+order.push('contact');
+const sections = [...order.map((k, i) => [k, `${i + 1}. ${names[k] ?? k}`]), ['extras', '+ Own section'], ['settings', 'Order, look & Google']]
+  .filter((x, i, a) => a.findIndex((y) => y[0] === x[0]) === i);
+const nlSections = order.map((k, i) => [k, `${i + 1}. ${names[k] ?? k}`]);
 ---
 <!doctype html>
 <html lang="nl">
@@ -98,7 +102,7 @@ const sections = [
       </div>
       <div>
         <p style="margin-bottom:8px">Nederlandse teksten:</p>
-        <div class="chips">{sections.slice(0, 7).map(([k, l]) => <a href={`/keystatic/singleton/${k}_nl`} target="_blank">{l} · NL</a>)}</div>
+        <div class="chips">{nlSections.map(([k, l]) => <a href={`/keystatic/singleton/${k}_nl`} target="_blank">{l} · NL</a>)}</div>
       </div>
     </section>
 

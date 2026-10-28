@@ -1,6 +1,7 @@
 ---
-import { getContent } from '../lib/content';
+import { getContent, isOn } from '../lib/content';
 const { education: ed, ui, lang } = getContent(Astro.currentLocale);
+const L = ed.layout ?? {};
 ---
 <section class="section" data-space={ed.layout?.spacing} id="education" aria-labelledby="edu-title">
   <div class="wrap" data-reveal>
@@ -10,12 +11,12 @@ const { education: ed, ui, lang } = getContent(Astro.currentLocale);
     <div class="grid">
       {ed.items.map((i) => (
         <article class="card"><div class="card-body">
-          {i.logo && <div class="card-logo"><img src={i.logo} alt={i.school} style={`height:${i.logoHeight || 32}px`} loading="lazy"></div>}
+          {i.logo && isOn(L.showLogos) && <div class="card-logo"><img src={i.logo} alt={i.school} style={`height:${i.logoHeight || 32}px`} loading="lazy"></div>}
           <span class="meta">{i.period}</span>
           <h3 class="h3">{i.title}</h3>
           <p><strong style="font-weight:500">{i.school}</strong></p>
-          {i.text && <p class="muted">{i.text}</p>}
-          {i.bullets.length > 0 && <ul class="list">{i.bullets.map((b) => <li>{b}</li>)}</ul>}
+          {i.text && isOn(L.showText) && <p class="muted">{i.text}</p>}
+          {i.bullets.length > 0 && isOn(L.showBullets) && <ul class="list">{i.bullets.map((b) => <li>{b}</li>)}</ul>}
         </div></article>
       ))}
     </div>

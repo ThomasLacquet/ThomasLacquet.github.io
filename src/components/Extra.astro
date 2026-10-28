@@ -1,0 +1,72 @@
+---
+// One "own section" from content/extras.json, built from blocks in the editor.
+import { getContent } from '../lib/content';
+const { extras } = getContent(Astro.currentLocale);
+const { index } = Astro.props as { index: number };
+const x: any = (extras.sections ?? [])[index];
+const id = `extra${index + 1}`;
+const L = x?.layout ?? {};
+const paras = (v: any) => (v?.paragraphs ?? []).filter((p: string) => p?.trim());
+---
+{x && (
+  <section class="section extra" data-space={L.spacing ?? 'compact'} data-band={L.band ?? 'none'} id={id} aria-labelledby={`${id}-title`}>
+    <div class="wrap" data-reveal>
+      <div class="sh">
+        <div>{x.eyebrow && <span class="eyebrow">{x.eyebrow}</span>}<h2 class="h2" id={`${id}-title`}>{x.title}</h2></div>
+        {x.intro && <p>{x.intro}</p>}
+      </div>
+      <div class="blocks">
+        {(x.blocks ?? []).map((b: any) => {
+          const v = b.value;
+          switch (b.discriminant) {
+            case 'text':
+              return <div class="blk-text stack">{paras(v).map((p: string) => <p>{p}</p>)}</div>;
+            case 'textPhoto':
+              return (
+                <div class="media-split" data-pos={v.photoPosition || 'right'} data-size="m" data-align="center">
+                  <div class="stack media-text">{paras(v).map((p: string) => <p>{p}</p>)}</div>
+                  {v.photo && <figure class="media"><img src={v.photo} alt={v.photoAlt || ''} width="900" height="700" loading="lazy"></figure>}
+                </div>
+              );
+            case 'list':
+              return (
+                <div class="blk-list">
+                  {v.title && <h3 class="label">{v.title}</h3>}
+                  {v.style === 'chips'
+                    ? <div class="chips">{(v.items ?? []).map((i: string) => <span class="chip">{i}</span>)}</div>
+                    : v.style === 'numbers'
+                      ? <ol class="list blk-num">{(v.items ?? []).map((i: string) => <li>{i}</li>)}</ol>
+                      : <ul class:list={['list', { 'blk-checks': v.style === 'checks' }]}>{(v.items ?? []).map((i: string) => <li>{i}</li>)}</ul>}
+                </div>
+              );
+            case 'quotes':
+              return (
+                <div class="grid blk-quotes">
+                  {(v ?? []).map((q: any) => (
+                    <figure class="card"><div class="card-body">
+                      <blockquote><p>{q.quote}</p></blockquote>
+                      <figcaption><strong>{q.name}</strong>{q.role && <span class="meta"> · {q.role}</span>}</figcaption>
+                    </div></figure>
+                  ))}
+                </div>
+              );
+            case 'cards':
+              return (
+                <div class="grid">
+                  {(v ?? []).map((c: any) => (
+                    <article class="card"><div class="card-body">
+                      {c.meta && <span class="meta">{c.meta}</span>}
+                      <h3 class="h3">{c.title}</h3>
+                      {c.text && <p class="muted">{c.text}</p>}
+                    </div></article>
+                  ))}
+                </div>
+              );
+            default:
+              return null;
+          }
+        })}
+      </div>
+    </div>
+  </section>
+)}

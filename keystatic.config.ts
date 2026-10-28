@@ -1,6 +1,8 @@
 // Editor for the site. Open http://localhost:4321/keystatic while `npm run dev` runs.
 // Every page section is a "singleton" stored as a JSON file in /content.
 import { config, fields, singleton } from '@keystatic/core';
+// The editor menu follows the order of the sections on the page (Settings → Sections on the page).
+import site from './content/settings.json';
 
 const text = (label: string, description?: string) => fields.text({ label, description });
 const longText = (label: string, description?: string) => fields.text({ label, description, multiline: true });
@@ -19,33 +21,50 @@ const logo = (section: string) => ({
 // Layout controls shown per section under "Layout".
 const opt = (label: string, options: [string, string][], defaultValue: string, description?: string) =>
   fields.select({ label, description, defaultValue, options: options.map(([value, l]) => ({ value, label: l })) });
-const spacing = () => opt('Space above this section', [['compact', 'Compact'], ['normal', 'Normal'], ['spacious', 'Spacious']], 'normal');
+const spacing = () => opt('Space above this section', [['compact', 'Compact (default)'], ['normal', 'Normal'], ['spacious', 'Spacious']], 'compact');
 const photoLayout = (defaultPosition: string, defaultAlign: string) => ({
   photoPosition: opt('Photo position', [['left', 'Left of the text'], ['right', 'Right of the text'], ['top', 'Above the text'], ['bottom', 'Below the text']], defaultPosition),
   photoSize: opt('Photo size', [['s', 'Small'], ['m', 'Medium'], ['l', 'Large']], 'm'),
   photoAlign: opt('Photo height next to the text', [['top', 'Higher (top)'], ['center', 'Middle'], ['bottom', 'Lower (bottom)']], defaultAlign, 'Only when the photo is left or right of the text.'),
   photoFocus: opt('Part of the photo to keep in view', [['top', 'Top'], ['center', 'Centre'], ['bottom', 'Bottom']], 'center', 'Shifts the crop up or down.'),
 });
+// On/off switch for one part of a section (default: shown).
+const show = (label: string, description?: string) => fields.checkbox({ label, description, defaultValue: true });
 const layout = (extra: Record<string, any> = {}) => fields.object({ spacing: spacing(), ...extra }, { label: 'Layout' });
 
 const sectionOptions = [
   { label: 'Logos', value: 'logos' },
   { label: 'Experience', value: 'experience' },
   { label: 'Selected work (cases)', value: 'work' },
-  { label: 'Speaking & teaching', value: 'speaking' },
+  { label: 'Public speaking', value: 'speaking' },
   { label: 'Education', value: 'education' },
   { label: 'Skills', value: 'skills' },
-  { label: 'About', value: 'about' },
+  { label: 'Personal', value: 'about' },
+  { label: 'Own section 1', value: 'extra1' },
+  { label: 'Own section 2', value: 'extra2' },
+  { label: 'Own section 3', value: 'extra3' },
 ] as const;
 
 const header = { eyebrow: text('Small label above the title'), title: text('Section title') };
 
 // Dutch copies of every section (content/nl/*.json). Only the TEXT there is used on /nl/;
 // photos, logos, layout and section order always come from the English version.
-const KEYS = ['settings', 'hero', 'logos', 'experience', 'work', 'speaking', 'education', 'skills', 'about', 'contact'] as const;
-function withDutch(s: Record<string, any>) {
+const KEYS = ['settings', 'hero', 'logos', 'experience', 'work', 'speaking', 'education', 'skills', 'about', 'contact', 'extras'] as const;
+// Page order: hero first, then the sections in the order of settings.json, contact last.
+const onPage: string[] = ['hero'];
+for (const id of (site as any).sections ?? []) {
+  const key = /^extra[1-3]$/.test(id) ? 'extras' : id;
+  if (!onPage.includes(key)) onPage.push(key);
+}
+onPage.push('contact');
+const notOnPage = ['logos', 'work', 'experience', 'speaking', 'education', 'skills', 'about', 'extras'].filter((k) => !onPage.includes(k));
+
+// Numbered labels in page order, plus the Dutch copies.
+function arrange(s: Record<string, any>) {
+  onPage.forEach((k, i) => { if (s[k]) s[k] = singleton({ ...s[k], label: `${i + 1}. ${s[k].label}` }); });
+  notOnPage.forEach((k) => { if (s[k]) s[k] = singleton({ ...s[k], label: `${s[k].label} (hidden)` }); });
   const nl = Object.fromEntries(
-    Object.entries(s).map(([k, v]) => [`${k}_nl`, singleton({ ...v, label: `${v.label} · NL`, path: `content/nl/${k}` })])
+    Object.entries(s).map(([k, v]) => [`${k}_nl`, singleton({ ...v, label: `${v.label.replace(' (hidden)', '')} · NL`, path: `content/nl/${k}` })])
   );
   return { ...s, ...nl };
 }
@@ -55,15 +74,15 @@ export default config({
   ui: {
     brand: { name: 'Thomas Lacquet · site' },
     navigation: {
-      'Whole site': ['settings'],
-      'Top of the page': ['hero', 'logos'],
-      Sections: ['experience', 'work', 'speaking', 'education', 'skills', 'about', 'contact'],
-      'Nederlands (alleen tekst)': KEYS.map((k) => `${k}_nl`) as any,
+      'Instellingen': ['settings'],
+      'Op de pagina, van boven naar onder': onPage as any,
+      'Niet op de pagina (zet aan via Instellingen)': notOnPage as any,
+      'Nederlands (alleen tekst)': ['settings_nl', ...onPage.map((k) => `${k}_nl`)] as any,
     },
   },
-  singletons: withDutch({
+  singletons: arrange({
     settings: singleton({
-      label: 'Settings, order & SEO',
+      label: 'Settings: order, look & Google',
       path: 'content/settings',
       format: { data: 'json' },
       schema: {
@@ -74,7 +93,17 @@ export default config({
         email: text('Email'),
         linkedin: text('LinkedIn URL'),
         cv: text('CV file path (optional)', 'Leave empty to hide every "Download CV" button. To show one, put a PDF in public/ and enter its path, e.g. /cv.pdf. Do not publish a CV with your phone number or home address.'),
-        accent: text('Accent colour (hex)', 'Used for links, labels and highlights, e.g. #1F5F99'),
+        theme: fields.object(
+          {
+            accent: opt('Accent colour', [['#1F5F99', 'Blue (default)'], ['#1D6670', 'Petrol'], ['#2E6B4F', 'Green'], ['#8A2E3B', 'Burgundy'], ['#5B3A73', 'Plum'], ['#9A4B1C', 'Rust'], ['#16202B', 'Ink (no colour)']], '#1F5F99', 'Links, labels and highlights. Every option is readable on every background.'),
+            background: opt('Page background', [['warm', 'Warm paper (default)'], ['white', 'White'], ['cool', 'Cool grey']], 'warm'),
+            textSize: opt('Text size', [['s', 'Smaller'], ['m', 'Normal'], ['l', 'Larger']], 'm'),
+            titleSize: opt('Title size', [['compact', 'Compact'], ['normal', 'Normal'], ['big', 'Big']], 'normal'),
+            showStickyContact: show('Floating contact bar while scrolling'),
+            showLanguageSwitch: show('NL/EN switch in the menu'),
+          },
+          { label: 'Look & site-wide options' }
+        ),
         sections: fields.array(
           fields.select({ label: 'Section', options: sectionOptions, defaultValue: 'experience' }),
           {
@@ -89,7 +118,7 @@ export default config({
     }),
 
     hero: singleton({
-      label: 'Hero (top)',
+      label: 'Top (name, intro, buttons)',
       path: 'content/hero',
       format: { data: 'json' },
       schema: {
@@ -119,6 +148,10 @@ export default config({
         ),
         layout: layout({
           avatarSize: opt('Profile photo size', [['s', 'Small'], ['m', 'Medium'], ['l', 'Large']], 'm'),
+          showPhoto: show('Show profile photo'),
+          showClaim: show('Show the big sentence with rotating words'),
+          showMeta: show('Show the grey line under the sentence'),
+          showLinkedIn: show('Show LinkedIn button'),
           background: opt('Background', [['charts', 'Chart changes with the rotating word'], ['clusters', 'Only the clusters'], ['none', 'None']], 'charts', 'Each study type gets its classic chart (JAR, purchase intent, funnel, clusters, tracker, NPS, key drivers). Phones always show only the faint clusters.'),
         }),
       },
@@ -147,7 +180,13 @@ export default config({
       format: { data: 'json' },
       schema: {
         ...header,
-        layout: layout(),
+        layout: layout({
+          showLogos: show('Show company logos'),
+          showSteps: show('Show the 6 project steps (Haystack)'),
+          showDataScience: show('Show the data science card (Haystack)'),
+          showSectors: show('Show sectors and study-type tags (Haystack)'),
+          showTimeline: show('Show the timeline line on the left'),
+        }),
         haystack: fields.object(
           {
             period: text('Period'),
@@ -209,12 +248,12 @@ export default config({
     }),
 
     speaking: singleton({
-      label: 'Speaking & teaching',
+      label: 'Public speaking',
       path: 'content/speaking',
       format: { data: 'json' },
       schema: {
         ...header,
-        layout: layout(photoLayout('left', 'top')),
+        layout: layout({ ...photoLayout('left', 'top'), showPhoto: show('Show main photo'), showCaption: show('Show photo caption'), showLogos: show('Show logos'), showBadges: show('Show badges (Yearly, 2024, ...)'), showTalkImages: show('Show images inside talks') }),
         intro: longText('Intro'),
         photo: image('Main photo', 'public/img/speaking', '/img/speaking/'),
         photoAlt: text('Photo description (for screen readers and Google)'),
@@ -238,7 +277,7 @@ export default config({
       format: { data: 'json' },
       schema: {
         ...header,
-        layout: layout(),
+        layout: layout({ showLogos: show('Show school logos'), showText: show('Show descriptions'), showBullets: show('Show bullet points') }),
         items: fields.array(
           fields.object({
             period: text('Period'),
@@ -259,7 +298,7 @@ export default config({
       format: { data: 'json' },
       schema: {
         ...header,
-        layout: layout(),
+        layout: layout({ showTools: show('Show analysis & dashboarding'), showAi: show('Show AI & new methods'), showAlso: show('Show "Also good at"'), showLanguages: show('Show languages') }),
         tools: list('Analysis & dashboarding', 'Tool'),
         ai: list('AI & new methods', 'Item'),
         also: list('Also good at', 'Skill'),
@@ -278,17 +317,73 @@ export default config({
     }),
 
     about: singleton({
-      label: 'About',
+      label: 'Personal (about)',
       path: 'content/about',
       format: { data: 'json' },
-      schema: { ...header, layout: layout(photoLayout('right', 'center')), photo: image('Photo (optional)', 'public/img/about', '/img/about/'), photoAlt: text('Photo description (for screen readers and Google)'), paragraphs: fields.array(fields.text({ label: 'Paragraph', multiline: true }), { label: 'Paragraphs', itemLabel: (p) => p.value.slice(0, 60) || 'Paragraph' }) },
+      schema: { ...header, layout: layout({ ...photoLayout('right', 'center'), showPhoto: show('Show photo') }), photo: image('Photo (optional)', 'public/img/about', '/img/about/'), photoAlt: text('Photo description (for screen readers and Google)'), paragraphs: fields.array(fields.text({ label: 'Paragraph', multiline: true }), { label: 'Paragraphs', itemLabel: (p) => p.value.slice(0, 60) || 'Paragraph' }) },
     }),
 
     contact: singleton({
-      label: 'Contact (bottom)',
+      label: 'Contact',
       path: 'content/contact',
       format: { data: 'json' },
-      schema: { ...header, layout: layout(), text: longText('Text') },
+      schema: { ...header, layout: layout({ showEmail: show('Show email'), showLinkedIn: show('Show LinkedIn') }), text: longText('Text') },
+    }),
+
+    // Up to 3 sections of your own, built from blocks. Place them via Settings → "Sections on the page" → "Own section 1/2/3".
+    extras: singleton({
+      label: 'Own sections (blocks)',
+      path: 'content/extras',
+      format: { data: 'json' },
+      schema: {
+        sections: fields.array(
+          fields.object({
+            navLabel: text('Name in the menu', 'Short, e.g. "Recommendations". Leave empty to keep it out of the menu.'),
+            eyebrow: text('Small label above the title'),
+            title: text('Section title'),
+            intro: longText('Intro (optional)'),
+            layout: layout({ band: opt('Background', [['none', 'Same as page'], ['band', 'Light band'], ['sand', 'Sand']], 'none') }),
+            blocks: fields.blocks(
+              {
+                text: { label: 'Text', schema: fields.object({ paragraphs: fields.array(fields.text({ label: 'Paragraph', multiline: true }), { label: 'Paragraphs', itemLabel: (p) => p.value.slice(0, 50) || 'Paragraph' }) }) },
+                textPhoto: {
+                  label: 'Text with photo',
+                  schema: fields.object({
+                    paragraphs: fields.array(fields.text({ label: 'Paragraph', multiline: true }), { label: 'Paragraphs', itemLabel: (p) => p.value.slice(0, 50) || 'Paragraph' }),
+                    photo: image('Photo', 'public/img/extras', '/img/extras/'),
+                    photoAlt: text('Photo description (for screen readers and Google)'),
+                    photoPosition: opt('Photo position', [['right', 'Right of the text'], ['left', 'Left of the text']], 'right'),
+                  }),
+                },
+                list: {
+                  label: 'List',
+                  schema: fields.object({
+                    title: text('Title above the list (optional)'),
+                    style: opt('Style', [['bullets', 'Bullets'], ['checks', 'Check marks'], ['numbers', 'Numbers'], ['chips', 'Tags']], 'bullets'),
+                    items: list('Items', 'Item'),
+                  }),
+                },
+                quotes: {
+                  label: 'Quotes / recommendations',
+                  schema: fields.array(
+                    fields.object({ quote: longText('Quote'), name: text('Name'), role: text('Role and company') }),
+                    { label: 'Quotes', itemLabel: (p) => p.fields.name.value || 'Quote' }
+                  ),
+                },
+                cards: {
+                  label: 'Cards',
+                  schema: fields.array(
+                    fields.object({ meta: text('Small label (optional)', 'e.g. a year or a sector'), title: text('Title'), text: longText('Text') }),
+                    { label: 'Cards', itemLabel: (p) => p.fields.title.value || 'Card' }
+                  ),
+                },
+              },
+              { label: 'Blocks', description: 'Add blocks in the order you want them on the page.' }
+            ),
+          }),
+          { label: 'Own sections (max 3)', description: 'Section 1 = "Own section 1" in Settings → Sections on the page.', itemLabel: (p) => p.fields.title.value || 'Section' }
+        ),
+      },
     }),
   }),
 });

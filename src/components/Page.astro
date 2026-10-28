@@ -13,17 +13,18 @@ import Skills from './Skills.astro';
 import About from './About.astro';
 import Contact from './Contact.astro';
 import StickyContact from './StickyContact.astro';
+import Extra from './Extra.astro';
 import { getContent } from '../lib/content';
 const { settings } = getContent(Astro.currentLocale);
 
 const sections: Record<string, any> = { logos: Logos, experience: Experience, work: Work, speaking: Speaking, education: Education, skills: Skills, about: About };
-const order = settings.sections.filter((s) => sections[s]);
+const order = settings.sections.filter((s) => sections[s] || /^extra[1-3]$/.test(s));
 ---
 <Base>
   <Nav />
   <main id="main">
     <Hero />
-    {order.map((s) => { const Section = sections[s]; return <Section />; })}
+    {order.map((s) => { if (s.startsWith('extra')) return <Extra index={Number(s.slice(5)) - 1} />; const Section = sections[s]; return <Section />; })}
   </main>
   <Contact />
   <StickyContact />

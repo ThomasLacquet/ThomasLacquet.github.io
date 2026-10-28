@@ -1,5 +1,5 @@
 ---
-import { getContent } from '../lib/content';
+import { getContent, isOn } from '../lib/content';
 const { settings, hero, ui, lang } = getContent(Astro.currentLocale);
 
 // Charts are separate image files in public/charts/, so their dummy numbers never end up in the page text (SEO).
@@ -61,7 +61,7 @@ const clusters = (hero.segments ?? []).slice(0, 4).map((s: any, i: number) => {
   )}
   <div class="wrap">
     <div class="hero-head">
-      {hero.photo && (
+      {hero.photo && isOn(hero.layout?.showPhoto) && (
         <div class="avatar">
           <img src={hero.photo} width="179" height="159" alt={`${ui.portraitOf} ${settings.name}`} fetchpriority="high">
         </div>
@@ -74,24 +74,24 @@ const clusters = (hero.segments ?? []).slice(0, 4).map((s: any, i: number) => {
 
     <p class="lead">{hero.lead}</p>
 
-    <div class="claim">
-      <p class="claim-line">
+    {(isOn(hero.layout?.showClaim) || (isOn(hero.layout?.showMeta) && hero.metaLine?.length > 0)) && <div class="claim">
+      {isOn(hero.layout?.showClaim) && <p class="claim-line">
         {hero.claim}{' '}
         <span class="rot" data-rotate={hero.claimWords.join('|')} data-charts={wordCharts.join('|')} aria-hidden="true">{hero.claimWords[0]}</span><span aria-hidden="true">.</span>
         <span class="sr-only">{hero.claimWords.join(', ')}.</span>
-      </p>
-      {hero.metaLine?.length > 0 && (
+      </p>}
+      {isOn(hero.layout?.showMeta) && hero.metaLine?.length > 0 && (
         <p class="claim-meta">
           {hero.metaLine.map((m, i) => <span>{i > 0 && <span class="sep" aria-hidden="true">·</span>}{m}</span>)}
         </p>
       )}
-    </div>
+    </div>}
 
     <div class="hero-foot">
       <div class="btns">
         <a class="btn btn-primary btn-mail" href={`mailto:${settings.email}`}><svg class="ico-mail" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>{ui.emailMe}</a>
         {settings.cv && <a class="btn" href={settings.cv} download>{ui.downloadCv}</a>}
-        <a class="btn-icon" href={settings.linkedin} rel="me" aria-label={ui.linkedinProfile} title="LinkedIn"><img src="/icons/linkedin.webp" width="48" height="48" alt=""></a>
+        {isOn(hero.layout?.showLinkedIn) && <a class="btn-icon" href={settings.linkedin} rel="me" aria-label={ui.linkedinProfile} title="LinkedIn"><img src="/icons/linkedin.webp" width="48" height="48" alt=""></a>}
       </div>
       {hero.tools?.length > 0 && (
         <ul class="tools" aria-label={ui.tools}>

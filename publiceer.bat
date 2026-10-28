@@ -26,8 +26,11 @@ if not exist .git (
   git reset -q origin/main
   rem Bestanden die alleen online staan (zoals de publicatie-instellingen) terugzetten
   git checkout -q -- .github 2>nul
-  git branch -q --set-upstream-to=origin/main main
 )
+
+rem Onderbroken poging van vroeger? Eerst opruimen.
+if exist .git\rebase-merge git rebase --abort
+if exist .git\rebase-apply git rebase --abort
 
 rem Controleren of de site bouwt, zodat er niets kapots online komt
 echo Site controleren...
@@ -42,17 +45,18 @@ if errorlevel 1 (
 )
 del build-log.txt >nul 2>nul
 
-rem Nieuwste online versie ophalen (bv. als Claude iets aanpaste) en jouw aanpassingen bewaren
+rem Deze map is de juiste versie: online geschiedenis ophalen en precies deze map erbovenop zetten
+git fetch -q origin main || goto :fail
+git reset -q --soft origin/main
 git add -A
 git restore --staged package-lock.json >nul 2>nul
 git diff --cached --quiet
 if errorlevel 1 (
   git commit -q -m "Update via publiceer.bat (%date% %time:~0,5%)"
+  git push -q origin HEAD:main || goto :fail
 ) else (
-  echo Geen nieuwe aanpassingen gevonden.
+  echo Alles stond al online.
 )
-git pull -q --rebase --autostash origin main || goto :fail
-git push -q origin main || goto :fail
 
 echo.
 echo ============================================================
