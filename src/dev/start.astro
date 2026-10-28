@@ -1,0 +1,137 @@
+---
+// Local control panel (dev only). Opens automatically from start.bat.
+import os from 'node:os';
+import QRCode from 'qrcode';
+import { pendingChanges, run } from './git';
+import { getContent } from '../lib/content';
+
+export const prerender = false;
+const { settings } = getContent('en');
+const LIVE = 'https://thomaslacquet.github.io';
+
+const ips = Object.values(os.networkInterfaces()).flat()
+  .filter((n: any) => n && n.family === 'IPv4' && !n.internal)
+  .map((n: any) => n.address)
+  .sort((a: string) => (/^(192\.168|10\.)/.test(a) ? -1 : 1));
+const port = Astro.url.port || '4321';
+const phoneUrl = ips[0] ? `http://${ips[0]}:${port}/` : '';
+const qr = phoneUrl ? await QRCode.toString(phoneUrl, { type: 'svg', margin: 1, color: { dark: '#16202B', light: '#FFFFFF' } }) : '';
+
+const pending = await pendingChanges();
+const last = (await run('git', ['log', '-1', '--format=%cd', '--date=format:%d/%m om %H:%M', 'origin/main'])).out;
+
+const sections = [
+  ['hero', 'Bovenaan (hero)'], ['experience', 'Ervaring'], ['skills', 'Skills'], ['speaking', 'Public speaking'],
+  ['education', 'Opleiding'], ['about', 'Personal'], ['contact', 'Contact'], ['settings', 'Volgorde, Google & instellingen'],
+];
+---
+<!doctype html>
+<html lang="nl">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex">
+<title>Bedieningspaneel · {settings.name}</title>
+<style>
+  :root { --bg:#F4F3EF; --ink:#16202B; --muted:#4A5562; --line:#D9D6CE; --accent:#1F5F99; --sand:#E9E6DE; --ok:#2E7D4F; --bad:#A8442A; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--ink); font: 16px/1.5 'IBM Plex Sans', system-ui, sans-serif; }
+  .wrap { max-width: 1040px; margin: 0 auto; padding: 32px 20px 64px; display: grid; gap: 20px; }
+  h1 { font: 800 clamp(1.8rem, 1.2rem + 2vw, 2.6rem)/1.1 'Archivo', system-ui, sans-serif; margin: 0; }
+  h2 { font: 700 1.1rem/1.3 'Archivo', system-ui, sans-serif; margin: 0 0 10px; }
+  .eyebrow { font: 500 .8rem/1 'IBM Plex Mono', monospace; color: var(--accent); letter-spacing: .06em; text-transform: uppercase; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 16px; }
+  .card { background: #fff; border: 1px solid var(--line); border-radius: 10px; padding: 20px; display: grid; gap: 12px; align-content: start; }
+  .card.hi { background: var(--ink); color: var(--bg); border-color: var(--ink); }
+  .card.hi p { color: #C9D1DA; }
+  p { margin: 0; color: var(--muted); }
+  .btn { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 48px; padding: 0 20px; border-radius: 6px; font-weight: 600; text-decoration: none; border: 1.5px solid var(--ink); color: var(--ink); background: #fff; cursor: pointer; font-size: 1rem; }
+  .btn.primary { background: var(--ink); color: var(--bg); }
+  .card.hi .btn.primary { background: var(--bg); color: var(--ink); border-color: var(--bg); }
+  .btn[disabled] { opacity: .5; cursor: wait; }
+  .row { display: flex; flex-wrap: wrap; gap: 10px; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; }
+  .chips a { font: 500 .85rem/1 'IBM Plex Mono', monospace; padding: 9px 12px; border: 1px solid var(--line); border-radius: 999px; color: var(--ink); text-decoration: none; background: var(--bg); }
+  .chips a:hover, .btn:hover { border-color: var(--accent); }
+  .status { font: 500 .9rem/1.4 'IBM Plex Mono', monospace; }
+  .status.ok { color: var(--ok); } .status.warn { color: #8A5A00; }
+  .qr svg { width: 150px; height: 150px; display: block; }
+  pre { margin: 0; white-space: pre-wrap; font: .8rem/1.45 'IBM Plex Mono', monospace; background: var(--sand); color: var(--ink); border-radius: 6px; padding: 12px; max-height: 260px; overflow: auto; }
+  pre:empty { display: none; }
+  ul.files { margin: 0; padding-left: 18px; font: .8rem/1.5 'IBM Plex Mono', monospace; color: #C9D1DA; max-height: 120px; overflow: auto; }
+  code { font-family: 'IBM Plex Mono', monospace; }
+</style>
+</head>
+<body>
+<main class="wrap">
+  <div>
+    <span class="eyebrow">Bedieningspaneel · alleen op je eigen pc</span>
+    <h1>Hallo Thomas</h1>
+  </div>
+
+  <section class="card hi" aria-labelledby="pub">
+    <h2 id="pub">Online zetten</h2>
+    {pending === null ? (
+      <p>Deze map is nog niet gekoppeld aan GitHub. Dubbelklik één keer op <code>publiceer.bat</code>, daarna kan het hier met één klik.</p>
+    ) : pending.length > 0 ? (
+      <>
+        <p class="status warn">● {pending.length} {pending.length === 1 ? 'aanpassing staat' : 'aanpassingen staan'} nog niet online</p>
+        <ul class="files">{pending.slice(0, 12).map((f) => <li>{f}</li>)}</ul>
+      </>
+    ) : (
+      <p class="status ok">● Alles staat online{last && ` · laatste update ${last}`}</p>
+    )}
+    <div class="row">
+      <button class="btn primary" id="publish" type="button" disabled={pending === null}>Zet online</button>
+      <a class="btn" href={LIVE} target="_blank" rel="noopener">Bekijk live site ↗</a>
+    </div>
+    <pre id="log" aria-live="polite"></pre>
+  </section>
+
+  <div class="grid">
+    <section class="card" aria-labelledby="edit">
+      <h2 id="edit">Aanpassen</h2>
+      <p>Teksten, foto's, logo's en lay-out. Klik op Save, dan zie je het meteen hieronder in Bekijken.</p>
+      <a class="btn primary" href="/keystatic" target="_blank">Open de editor</a>
+      <div>
+        <p style="margin-bottom:8px">Rechtstreeks naar een sectie:</p>
+        <div class="chips">{sections.map(([k, l]) => <a href={`/keystatic/singleton/${k}`} target="_blank">{l}</a>)}</div>
+      </div>
+      <div>
+        <p style="margin-bottom:8px">Nederlandse teksten:</p>
+        <div class="chips">{sections.slice(0, 7).map(([k, l]) => <a href={`/keystatic/singleton/${k}_nl`} target="_blank">{l} · NL</a>)}</div>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="view">
+      <h2 id="view">Bekijken (lokaal)</h2>
+      <p>Zo ziet het eruit met je laatste aanpassingen, nog voor het online staat.</p>
+      <div class="row">
+        <a class="btn" href="/" target="_blank">Engelse site</a>
+        <a class="btn" href="/nl/" target="_blank">Nederlandse site</a>
+      </div>
+    </section>
+
+    <section class="card" aria-labelledby="phone">
+      <h2 id="phone">Op je telefoon</h2>
+      {phoneUrl ? (
+        <>
+          <p>Scan met je camera (zelfde wifi):</p>
+          <div class="qr" set:html={qr} />
+          <p><code>{phoneUrl}</code></p>
+        </>
+      ) : <p>Geen wifi-adres gevonden. Zit je pc op het netwerk?</p>}
+    </section>
+  </div>
+</main>
+<script is:inline>
+  var b = document.getElementById('publish'), log = document.getElementById('log');
+  if (b) b.addEventListener('click', function () {
+    b.disabled = true; b.textContent = 'Bezig… (± 30 s)'; log.textContent = 'Site controleren en online zetten…';
+    fetch('/start/publish', { method: 'POST' }).then(function (r) { return r.json(); }).then(function (d) {
+      log.textContent = d.log + (d.ok ? '\n\n✓ Gelukt. Over ongeveer een minuut staat het live op thomaslacquet.github.io.' : '');
+      b.textContent = d.ok ? 'Online gezet ✓' : 'Opnieuw proberen'; b.disabled = false;
+    }).catch(function () { log.textContent = 'Geen verbinding met de lokale server. Draait start.bat nog?'; b.disabled = false; b.textContent = 'Opnieuw proberen'; });
+  });
+</script>
+</body>
+</html>

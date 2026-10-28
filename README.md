@@ -51,6 +51,9 @@ Na de livegang:
 1. Voeg de site toe aan Google Search Console en dien je sitemap in.
 2. Zet de link op je LinkedIn-profiel.
 
+## Bedieningspaneel
+Dubbelklik op **start.bat**. Zodra alles klaar is, opent je browser vanzelf het bedieningspaneel (`http://localhost:4321/start`) met: de editor (en knoppen per sectie, Engels en Nederlands), een voorbeeld van de site, een QR-code voor je telefoon, en de knop **Zet online**.
+
 ## Online zetten
 De site staat op **https://thomaslacquet.github.io** (gratis via GitHub Pages). Pas je iets aan in de editor en ben je tevreden? Dubbelklik op **publiceer.bat**. Het script controleert eerst of de site bouwt en zet hem dan online; na ongeveer een minuut staat de nieuwe versie live.
 

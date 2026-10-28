@@ -12,14 +12,22 @@ set NODEMAJOR=%NODEMAJOR:v=%
 if %NODEMAJOR% LSS 20 goto :oldnode
 if %NODEMAJOR%==21 goto :oldnode
 
-if not exist node_modules\@keystatic\astro (
-  echo Eerste keer: onderdelen installeren...
+set NEEDINSTALL=
+if not exist node_modules\@keystatic\astro set NEEDINSTALL=1
+if not exist node_modules\qrcode set NEEDINSTALL=1
+if defined NEEDINSTALL (
+  echo Onderdelen installeren of bijwerken...
   call npm install --no-audit --no-fund
 )
-start "" http://localhost:4321/keystatic
-start "" http://localhost:4321
+rem Open het bedieningspaneel zodra de lokale server klaar is
+start "" /b powershell -NoProfile -WindowStyle Hidden -Command "for($i=0;$i -lt 90;$i++){try{Invoke-WebRequest -UseBasicParsing -TimeoutSec 2 http://localhost:4321/start | Out-Null; Start-Process 'http://localhost:4321/start'; break}catch{Start-Sleep -Milliseconds 700}}"
 echo.
 echo ============================================================
+echo  Je bedieningspaneel opent zo vanzelf in je browser:
+echo    http://localhost:4321/start
+echo  Daar vind je: editor, voorbeeld EN/NL, QR-code voor je telefoon
+echo  en de knop Zet online.
+echo.
 echo  Op je iPhone (zelfde wifi) open je in Chrome of Safari:
 for /f "usebackq delims=" %%i in (`powershell -NoProfile -Command "(Get-NetIPAddress -AddressFamily IPv4 | Where-Object { $_.InterfaceAlias -notmatch 'Loopback|vEthernet|WSL' -and $_.PrefixOrigin -ne 'WellKnown' } | Select-Object -First 1).IPAddress"`) do echo    http://%%i:4321
 echo  Vraagt Windows om toegang tot het netwerk: kies Prive netwerk en Toestaan.

@@ -31,6 +31,9 @@ Personal CV website of Thomas Lacquet (research consultant, Haystack Consulting,
 - He edits `content/*.json` himself through the editor. Before overwriting any of those files on his computer, read his current version and merge it.
 - His local copy lives at `C:\Hackerman\thomas-lacquet-site\site`. He runs `start.bat` (Windows, needs Node ≥ 20.19).
 
+## Local control panel
+- `src/dev/` holds a dev-only control panel at `http://localhost:4321/start` (injected by `src/dev/integration.mjs`, never built). It links to the editor and each section, shows the EN/NL preview, a QR code for the phone, the list of files not yet online, and a "Zet online" button that runs the same steps as `publiceer.bat` via `src/dev/publish.ts` (only accepted from localhost). `start.bat` opens it as soon as the dev server answers.
+
 ## Publishing
 - Live at https://thomaslacquet.github.io (GitHub Pages, repo `ThomasLacquet/thomaslacquet.github.io`, public). Every push to `main` builds and deploys via `.github/workflows/deploy.yml`.
 - The owner edits on his PC (`C:\Hackerman\thomas-lacquet-site\site`) and publishes himself with `publiceer.bat` (git + Git Credential Manager; it builds first, commits, `pull --rebase --autostash`, pushes). He can also ask Claude: then stage his current files, and in the repo clone always `git pull --rebase` before pushing, because he may have pushed. Never commit `Private/`, PDFs or anything with his phone number or home address.
