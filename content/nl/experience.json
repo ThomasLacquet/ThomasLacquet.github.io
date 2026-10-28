@@ -51,12 +51,12 @@
     ],
     "panelLabel": "Data science- en innovatieteam",
     "panelTitle": "Snellere processen, nieuwere methodes",
-    "panelText": "Onze opdracht: onze interne processen efficiënter maken en bijblijven met de nieuwste innovaties in onderzoek. We testen nieuwe technieken op lopende klantprojecten en houden wat werkt. Predictive models tonen welke drivers koopintentie echt bewegen, zodat segmentatie en targeting op meer steunen dan gemiddelden. Met synthetische data verkennen we kleine of moeilijk bereikbare doelgroepen vóór er veldwerkbudget naartoe gaat. Dashboards in R en Displayr werken zichzelf bij als er een nieuwe golf binnenkomt, in plaats van ze telkens met de hand opnieuw te bouwen.",
+    "panelText": "We maken onze interne processen efficiënter en testen nieuwe methodes op echte klantprojecten. Wat werkt, houden we.",
     "panelTags": [
-      "Predictive modelling → drivers & segmenten",
-      "Synthetische data → moeilijk bereikbare groepen",
-      "Dashboards in code → minder handwerk",
-      "AI-tools → snellere interne workflows"
+      "Predictive modelling → key drivers",
+      "Synthetische data → moeilijke doelgroepen",
+      "Automatische dashboards → minder handwerk",
+      "AI-tools → snellere workflows"
     ]
   },
   "jobs": [
