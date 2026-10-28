@@ -11,6 +11,8 @@ const accent = theme.accent || '#1F5F99';
 const h = e.haystack;
 const site = new URL('/', Astro.site).href.replace(/^https?:\/\//, '').replace(/\/$/, '');
 const linkedin = settings.linkedin.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+// lower-case the first letter, but keep abbreviations such as "AI"
+const lc = (t: string) => (/^[A-Z]{2}/.test(t) ? t : t.charAt(0).toLowerCase() + t.slice(1));
 const levelWord: Record<string, string> = { A1: 'Beginner', A2: 'Elementary', B1: 'Intermediate', B2: 'Upper intermediate', C1: 'Advanced', C2: 'Proficient' };
 ---
 <!doctype html>
@@ -77,7 +79,7 @@ const levelWord: Record<string, string> = { A1: 'Beginner', A2: 'Elementary', B1
         <ul class="dots">
           <li><strong>{(h as any).researchTitle || 'Quantitative researcher'}, end to end:</strong> {h.steps.map((s) => s.name.toLowerCase()).join(' → ')}.</li>
           {h.note && <li><strong>{h.note.replace(/\.$/, '')}.</strong> {h.studyTypes.join(' · ')}.</li>}
-          <li><strong>{h.panelLabel}:</strong> {h.panelText}</li>
+          <li><strong>{h.panelLabel}:</strong> {h.panelText} I use {h.panelTags.map((t) => lc(t.split('→')[0].trim())).join(' and ')} in my own work, and keep up with {((h as any).radar ?? []).map((t: string) => lc(t)).join(', ')}.</li>
         </ul>
       </article>
       {e.jobs.map((j) => (

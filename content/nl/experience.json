@@ -52,13 +52,16 @@
     ],
     "panelLabel": "Data science- en innovatieteam",
     "panelTitle": "Een oog op wat komt",
-    "panelText": "In dit team blijf ik bij met de nieuwste innovaties in marktonderzoek en volg ik waar het vak naartoe gaat: synthetische data, sample boosts, virtual audiences, predictive modelling. We zoeken ook manieren om onze interne processen efficiënter te maken. In mijn eigen werk gebruik ik automatische dashboards in R en Displayr, en AI-tools.",
+    "panelText": "We maken onze interne processen efficiënter en volgen waar marktonderzoek naartoe gaat.",
     "panelTags": [
       "Automatische dashboards → minder handwerk",
-      "AI-tools → snellere workflows",
-      "Op onze radar: synthetische data & boosts",
-      "Op onze radar: virtual audiences",
-      "Op onze radar: predictive modelling"
+      "AI-tools → snellere workflows"
+    ],
+    "radarLabel": "Bijblijven met de nieuwste innovaties, zoals:",
+    "radar": [
+      "Synthetische data & boosts",
+      "Virtual audiences",
+      "Predictive modelling"
     ]
   },
   "jobs": [

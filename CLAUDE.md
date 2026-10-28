@@ -24,6 +24,7 @@ Personal CV website of Thomas Lacquet (research consultant, Haystack Consulting,
 
 ## Editor options (owner-facing)
 - Every section's `layout` has on/off switches (`show*`, default on; `isOn()` in `content.ts` treats missing as on). Settings has `theme` (accent from a fixed accessible palette, background warm/white/cool, text size, title size, sticky bar and language switch on/off) → data attributes on `<html>` in `Base.astro`, styled at the end of `global.css`.
+- Haystack block = two role cards (design A1): `researchTitle` + `intro` + `steps` (research role); `panelLabel` + `panelText` + `panelTags` ("Tool → benefit", tools he uses himself) + `radarLabel` + `radar` (trends he keeps up with but does not do himself: synthetic data, boosts, virtual audiences, predictive modelling). `panelTitle` is not shown.
 - Own sections: `content/extras.json` (`sections[]`, each with blocks: text, textPhoto, list, quotes, cards) rendered by `Extra.astro`; placed via `extra1..3` in `settings.sections`; menu name from `navLabel`.
 - The editor menu is generated from `settings.sections` (numbered, page order; hidden sections grouped apart) in `keystatic.config.ts`.
 - Default spacing between sections is compact.

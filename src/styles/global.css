@@ -406,3 +406,6 @@ html[data-titles="big"] .hero h1 { font-size: clamp(2.5rem, 1.5rem + 4.4vw, 4.75
 .role-uses li { display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--line); }
 .use-note { font: 400 .78rem/1.3 var(--mono); color: var(--muted); text-align: right; }
 @media (max-width: 860px) { .roles { grid-template-columns: 1fr; } }
+
+.role-radar { display: grid; gap: 10px; padding-top: 4px; }
+.role-radar strong { font-weight: 600; }

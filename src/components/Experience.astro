@@ -44,6 +44,12 @@ const L = e.layout ?? {};
                   return <li><strong>{a.charAt(0).toUpperCase() + a.slice(1)}</strong>{b && <span class="use-note">{t.includes('→') ? `→ ${b}` : b}</span>}</li>;
                 })}
               </ul>
+              {h.radar?.length > 0 && (
+                <div class="role-radar">
+                  {h.radarLabel && <strong>{h.radarLabel}</strong>}
+                  <ul class="ds-tags">{h.radar.map((t) => <li>{t}</li>)}</ul>
+                </div>
+              )}
             </div>}
           </div>
           {isOn(L.showSectors) && (h.note || h.studyTypes?.length > 0) && (

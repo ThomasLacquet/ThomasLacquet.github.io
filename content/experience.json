@@ -52,13 +52,16 @@
     ],
     "panelLabel": "Data science & innovation team",
     "panelTitle": "Keeping an eye on what comes next",
-    "panelText": "In this team I keep up with the latest innovations in market research and watch where the field is heading: synthetic data, sample boosts, virtual audiences, predictive modelling. We also look for ways to make our internal processes more efficient. In my own work I use automatic dashboards in R and Displayr, and AI tools.",
+    "panelText": "We make our internal processes more efficient and watch where market research is heading.",
     "panelTags": [
       "Automatic dashboards → less manual work",
-      "AI tools → faster workflows",
-      "On our radar: synthetic data & boosts",
-      "On our radar: virtual audiences",
-      "On our radar: predictive modelling"
+      "AI tools → faster workflows"
+    ],
+    "radarLabel": "Keeping up with the latest innovations, like:",
+    "radar": [
+      "Synthetic data & boosts",
+      "Virtual audiences",
+      "Predictive modelling"
     ]
   },
   "jobs": [

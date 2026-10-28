@@ -204,7 +204,9 @@ export default config({
             panelLabel: text('Innovation role: title', 'e.g. "Data science & innovation team"'),
             panelTitle: text('Innovation role: subtitle (not shown at the moment)'),
             panelText: longText('Panel: text'),
-            panelTags: list('Innovation role: lines', 'Write "Tool → what it gives" or "On our radar: topic"'),
+            panelTags: list('Innovation role: tools you use', 'Write "Tool → what it gives", e.g. "AI tools → faster workflows"'),
+            radarLabel: text('Innovation role: line above the trends', 'e.g. "Keeping up with the latest innovations, like:"'),
+            radar: list('Innovation role: trends you follow', 'Trend'),
           },
           { label: 'Current job (Haystack)' }
         ),
