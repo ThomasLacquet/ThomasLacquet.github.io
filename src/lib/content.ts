@@ -43,7 +43,7 @@ const nl = Object.fromEntries(Object.entries(en).map(([k, v]) => [k, merge(v, nl
 // Fixed interface text (buttons, labels) per language.
 const ui = {
   en: {
-    nav: { experience: 'Experience', work: 'Work', speaking: 'Speaking', education: 'Education', skills: 'Skills', about: 'About' } as Record<string, string>,
+    nav: { experience: 'Experience', work: 'Work', speaking: 'Public speaking', education: 'Education', skills: 'Skills', about: 'Personal' } as Record<string, string>,
     contact: 'Contact', emailMe: 'Email me', downloadCv: 'Download CV (PDF)', cvShort: 'CV', linkedinProfile: 'LinkedIn profile',
     portraitOf: 'Portrait of', skip: 'Skip to content', mainNav: 'Main', howProject: 'How a project runs', studyTypes: 'Study types',
     tools: 'Tools', organisations: 'Organisations',
@@ -56,7 +56,7 @@ const ui = {
     ogLocale: 'en_BE',
   },
   nl: {
-    nav: { experience: 'Ervaring', work: 'Projecten', speaking: 'Spreken', education: 'Opleiding', skills: 'Vaardigheden', about: 'Over mij' } as Record<string, string>,
+    nav: { experience: 'Ervaring', work: 'Projecten', speaking: 'Publiek spreken', education: 'Opleiding', skills: 'Vaardigheden', about: 'Persoonlijk' } as Record<string, string>,
     contact: 'Contact', emailMe: 'Mail me', downloadCv: 'Download cv (pdf)', cvShort: 'CV', linkedinProfile: 'LinkedIn-profiel',
     portraitOf: 'Portret van', skip: 'Naar de inhoud', mainNav: 'Hoofdmenu', howProject: 'Hoe een project verloopt', studyTypes: 'Soorten onderzoek',
     tools: 'Tools', organisations: 'Organisaties',

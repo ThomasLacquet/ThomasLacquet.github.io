@@ -5,13 +5,12 @@
   "location": "Leuven, Belgium",
   "email": "thomaslacquet@hotmail.com",
   "linkedin": "https://www.linkedin.com/in/thomas-lacquet/",
-  "cv": "",
   "accent": "#1F5F99",
   "sections": [
     "experience",
+    "skills",
     "speaking",
     "education",
-    "skills",
     "about"
   ],
   "seoTitle": "Thomas Lacquet · Research Consultant, Leuven",
