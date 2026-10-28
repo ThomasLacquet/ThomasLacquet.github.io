@@ -75,7 +75,7 @@ const levelWord: Record<string, string> = { A1: 'Beginner', A2: 'Elementary', B1
         <div class="item-head"><h3>{h.title} · {h.company.split(' · ')[0]}</h3><span class="when">{h.period}</span></div>
         <p>{h.intro}</p>
         <ul class="dots">
-          <li><strong>End to end:</strong> {h.steps.map((s) => s.name.toLowerCase()).join(' → ')}.</li>
+          <li><strong>{(h as any).researchTitle || 'Quantitative researcher'}, end to end:</strong> {h.steps.map((s) => s.name.toLowerCase()).join(' → ')}.</li>
           {h.note && <li><strong>{h.note.replace(/\.$/, '')}.</strong> {h.studyTypes.join(' · ')}.</li>}
           <li><strong>{h.panelLabel}:</strong> {h.panelText}</li>
         </ul>

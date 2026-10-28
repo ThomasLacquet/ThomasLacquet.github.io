@@ -193,17 +193,18 @@ export default config({
             title: text('Job title'),
             company: text('Company'),
             ...logo('experience'),
-            intro: longText('Intro'),
+            researchTitle: text('Title of your research role', 'e.g. "Quantitative researcher"'),
+            intro: longText('Intro (research role)'),
             steps: fields.array(
               fields.object({ name: text('Step'), what: text('Short explanation') }),
               { label: 'Project steps', itemLabel: (p) => p.fields.name.value || 'Step' }
             ),
             note: longText('Note under the steps (sectors)'),
             studyTypes: list('Study types (tags under the steps)', 'Study type'),
-            panelLabel: text('Panel: small label'),
-            panelTitle: text('Panel: title'),
+            panelLabel: text('Innovation role: title', 'e.g. "Data science & innovation team"'),
+            panelTitle: text('Innovation role: subtitle (not shown at the moment)'),
             panelText: longText('Panel: text'),
-            panelTags: list('Panel: tags', 'Tag'),
+            panelTags: list('Innovation role: lines', 'Write "Tool → what it gives" or "On our radar: topic"'),
           },
           { label: 'Current job (Haystack)' }
         ),

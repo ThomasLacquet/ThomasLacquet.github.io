@@ -18,23 +18,32 @@ const L = e.layout ?? {};
         </div>
         <div>
           <div><h3 class="h3">{h.title}</h3><p class="sub">{h.company}</p></div>
-          <div class="hay">
-            <div class="hay-main">
-              <p class="job-intro">{h.intro}</p>
-              {isOn(L.showSteps) && <ol class="steps" aria-label={ui.howProject}>
+          <div class="roles">
+            <div class="role-card">
+              <div class="role-head">
+                <span class="role-icon" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 19V10M10 19V5M16 19v-7M22 19H2"/></svg></span>
+                <h4>{h.researchTitle || 'Quantitative researcher'}</h4>
+              </div>
+              <p class="muted">{h.intro}</p>
+              {isOn(L.showSteps) && <ol class="role-steps" aria-label={ui.howProject}>
                 {h.steps.map((s, i) => (
-                  <li class={i === h.steps.length - 1 ? 'last' : ''}>
-                    <span class="step-n">{String(i + 1).padStart(2, '0')}</span>
-                    <span><strong>{s.name}</strong>{s.what && <span class="muted"> · {s.what}</span>}</span>
-                  </li>
+                  <li><span class="step-n">{String(i + 1).padStart(2, '0')}</span><span><strong>{s.name}</strong>{s.what && <span class="muted"> · {s.what}</span>}</span></li>
                 ))}
               </ol>}
             </div>
-            {isOn(L.showDataScience) && <div class="ds-card">
-              <span class="eyebrow">{h.panelLabel}</span>
-              <h4>{h.panelTitle}</h4>
-              <p>{h.panelText}</p>
-              <ul class="ds-tags">{h.panelTags.map((t) => <li>{t}</li>)}</ul>
+            {isOn(L.showDataScience) && <div class="role-card">
+              <div class="role-head">
+                <span class="role-icon alt" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 18h6M10 21h4M12 3a6 6 0 0 0-3.5 10.9c.6.5 1 1.2 1 2V17h5v-1.1c0-.8.4-1.5 1-2A6 6 0 0 0 12 3z"/></svg></span>
+                <h4>{h.panelLabel}</h4>
+              </div>
+              <p class="muted">{h.panelText}</p>
+              <ul class="role-uses">
+                {h.panelTags.map((t) => {
+                  // "Tool → what it gives" or "On our radar: topic"
+                  const [a, b] = t.includes('→') ? t.split('→').map((x) => x.trim()) : t.includes(':') ? t.split(':').map((x) => x.trim()).reverse() : [t, ''];
+                  return <li><strong>{a.charAt(0).toUpperCase() + a.slice(1)}</strong>{b && <span class="use-note">{t.includes('→') ? `→ ${b}` : b}</span>}</li>;
+                })}
+              </ul>
             </div>}
           </div>
           {isOn(L.showSectors) && (h.note || h.studyTypes?.length > 0) && (
