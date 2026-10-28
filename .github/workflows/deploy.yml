@@ -22,6 +22,9 @@ jobs:
           cache: npm
       - run: npm ci
       - run: npm run build
+      # Make the downloadable CV (dist/Thomas-Lacquet-CV.pdf) from the /cv page
+      - run: npx playwright install --with-deps chromium
+      - run: npm run cv
       - uses: actions/upload-pages-artifact@v3
         with:
           path: dist

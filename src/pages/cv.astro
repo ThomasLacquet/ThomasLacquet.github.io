@@ -1,0 +1,113 @@
+---
+// Printable CV (max. 2 A4), built from the same content as the site.
+// `npm run cv` turns this page into /Thomas-Lacquet-CV.pdf (done automatically when publishing).
+// Privacy: only email, LinkedIn, website and city. Never a phone number or home address.
+import '../styles/cv.css';
+import { getContent } from '../lib/content';
+
+const { settings, hero, experience: e, speaking, education, skills, about } = getContent('en');
+const theme: any = (settings as any).theme ?? {};
+const accent = theme.accent || '#1F5F99';
+const h = e.haystack;
+const site = new URL('/', Astro.site).href.replace(/^https?:\/\//, '').replace(/\/$/, '');
+const linkedin = settings.linkedin.replace(/^https?:\/\/(www\.)?/, '').replace(/\/$/, '');
+const levelWord: Record<string, string> = { A1: 'Beginner', A2: 'Elementary', B1: 'Intermediate', B2: 'Upper intermediate', C1: 'Advanced', C2: 'Proficient' };
+---
+<!doctype html>
+<html lang="en" style={`--accent:${accent}`}>
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>{settings.name} · CV</title>
+</head>
+<body>
+<div class="side-bg" aria-hidden="true"></div>
+<div class="cv">
+  <aside class="side">
+    {hero.photo && <div class="photo"><img src={hero.photo} alt=""></div>}
+
+    <section>
+      <h2>Contact</h2>
+      <ul class="contact">
+        <li><span class="k">Email</span><a href={`mailto:${settings.email}`}>{settings.email}</a></li>
+        <li><span class="k">LinkedIn</span><a href={settings.linkedin}>{linkedin}</a></li>
+        <li><span class="k">Website</span><a href={`https://${site}`}>{site}</a></li>
+        <li><span class="k">Based in</span>{settings.location}</li>
+        <li><span class="k">Licence</span>Driver's licence B</li>
+      </ul>
+    </section>
+
+    <section>
+      <h2>Skills</h2>
+      {skills.tools.length > 0 && <><h3>Analysis & dashboarding</h3><p>{skills.tools.join(', ')}</p></>}
+      {skills.ai.length > 0 && <><h3>AI & new methods</h3><p>{skills.ai.join(', ')}</p></>}
+      {skills.also.length > 0 && <><h3>Also good at</h3><ul class="dots">{skills.also.map((a) => <li>{a}</li>)}</ul></>}
+    </section>
+
+    <section>
+      <h2>Languages</h2>
+      <ul class="langs">{skills.languages.map((l) => <li><span>{l.name}</span><span>{l.level} · {levelWord[l.level] ?? ''}</span></li>)}</ul>
+    </section>
+
+    {about.paragraphs.length > 0 && (
+      <section>
+        <h2>More about me</h2>
+        {about.paragraphs.map((p) => <p>{p}</p>)}
+      </section>
+    )}
+  </aside>
+
+  <main class="main">
+    <header class="head">
+      <h1>{settings.name}</h1>
+      <p class="role">{settings.role}</p>
+      {hero.metaLine?.length > 0 && <p class="meta">{hero.metaLine.join(' · ')}</p>}
+    </header>
+
+    <section>
+      <h2>Profile</h2>
+      <p>{hero.lead}</p>
+    </section>
+
+    <section>
+      <h2>Experience</h2>
+      <article class="item">
+        <div class="item-head"><h3>{h.title} · {h.company.split(' · ')[0]}</h3><span class="when">{h.period}</span></div>
+        <p>{h.intro}</p>
+        <ul class="dots">
+          <li><strong>End to end:</strong> {h.steps.map((s) => s.name.toLowerCase()).join(' → ')}.</li>
+          {h.note && <li><strong>{h.note.replace(/\.$/, '')}.</strong> {h.studyTypes.join(' · ')}.</li>}
+          <li><strong>{h.panelLabel}:</strong> {h.panelText}</li>
+        </ul>
+      </article>
+      {e.jobs.map((j) => (
+        <article class="item">
+          <div class="item-head"><h3>{j.title} · {j.company.split(' · ')[0]}</h3><span class="when">{j.period}</span></div>
+          {j.company.includes(' · ') && <p class="sub">{j.company.split(' · ').slice(1).join(' · ')}</p>}
+          {j.text && <p>{j.text}</p>}
+        </article>
+      ))}
+    </section>
+
+    <section>
+      <h2>Public speaking</h2>
+      <ul class="dots talks">
+        {speaking.talks.map((t) => <li><strong>{t.title.split(' · ')[0]}</strong>{t.badge && <span class="when"> · {t.badge}</span>}: {t.text}</li>)}
+      </ul>
+    </section>
+
+    <section>
+      <h2>Education</h2>
+      {education.items.map((i) => (
+        <article class="item">
+          <div class="item-head"><h3>{i.title}</h3><span class="when">{i.period}</span></div>
+          <p class="sub">{i.school}</p>
+          {i.text && <p>{i.text}</p>}
+          {i.bullets.length > 0 && <ul class="dots">{i.bullets.map((b) => <li>{b}</li>)}</ul>}
+        </article>
+      ))}
+    </section>
+  </main>
+</div>
+</body>
+</html>

@@ -92,7 +92,7 @@ export default config({
         location: text('Location'),
         email: text('Email'),
         linkedin: text('LinkedIn URL'),
-        cv: text('CV file path (optional)', 'Leave empty to hide every "Download CV" button. To show one, put a PDF in public/ and enter its path, e.g. /cv.pdf. Do not publish a CV with your phone number or home address.'),
+        cv: text('CV download', 'Your CV is made automatically from the text on this site (max. 2 A4, English) every time you publish. Keep "/Thomas-Lacquet-CV.pdf" to show the Download CV buttons; empty this field to hide them. Preview: localhost:4321/cv/'),
         theme: fields.object(
           {
             accent: opt('Accent colour', [['#1F5F99', 'Blue (default)'], ['#1D6670', 'Petrol'], ['#2E6B4F', 'Green'], ['#8A2E3B', 'Burgundy'], ['#5B3A73', 'Plum'], ['#9A4B1C', 'Rust'], ['#16202B', 'Ink (no colour)']], '#1F5F99', 'Links, labels and highlights. Every option is readable on every background.'),

@@ -33,3 +33,4 @@
 ## Languages
 - English: https://thomaslacquet.github.io/
 - Nederlands (Dutch): https://thomaslacquet.github.io/nl/ — same profile in Dutch, for recruiters in Flanders. Speaks Dutch (native, C2), English (C1), French (B2), German (B1).
+- CV (PDF, generated from this site): https://thomaslacquet.github.io/Thomas-Lacquet-CV.pdf

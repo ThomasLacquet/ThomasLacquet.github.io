@@ -58,7 +58,7 @@ const ui = {
   },
   nl: {
     nav: { experience: 'Ervaring', work: 'Projecten', speaking: 'Publiek spreken', education: 'Opleiding', skills: 'Vaardigheden', about: 'Persoonlijk' } as Record<string, string>,
-    contact: 'Contact', emailMe: 'Mail me', downloadCv: 'Download cv (pdf)', cvShort: 'CV', linkedinProfile: 'LinkedIn-profiel',
+    contact: 'Contact', emailMe: 'Mail me', downloadCv: 'Download cv (Engels, pdf)', cvShort: 'CV', linkedinProfile: 'LinkedIn-profiel',
     portraitOf: 'Portret van', skip: 'Naar de inhoud', mainNav: 'Hoofdmenu', howProject: 'Hoe een project verloopt', studyTypes: 'Soorten onderzoek',
     tools: 'Tools', organisations: 'Organisaties',
     skillLabels: { analysis: 'Analyse & dashboarding', ai: 'AI & nieuwe methodes', also: 'Ook goed in', languages: 'Talen' },

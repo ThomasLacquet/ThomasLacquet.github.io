@@ -48,7 +48,7 @@ Personal CV website of Thomas Lacquet (research consultant, Haystack Consulting,
 - Keep it fast: no client-side frameworks on the public page, no external fonts or scripts. Images as WebP or JPG with width and height set, and lazy loading below the fold.
 - Accessibility: real links and buttons, alt text, contrast ≥ 4.5:1, works at 390 px wide, respects `prefers-reduced-motion`.
 - Copy is English. Write like a person: concrete claims, varied sentence length, no clichés, no invented numbers. Missing facts stay as `[PLACEHOLDER]` in capitals.
-- No CV PDF and no phone number or home address on the public site (owner's choice, privacy). `settings.cv` is empty, which hides every CV button.
+- CV download: `src/pages/cv.astro` + `src/styles/cv.css` (A4, max 2 pages, English only, styled after his original CV) is printed to `dist/Thomas-Lacquet-CV.pdf` by `scripts/make-cv.mjs` (Playwright) in the deploy workflow. `settings.cv` = that path shows the buttons; empty hides them. Never a phone number or home address on the site or the CV (owner's choice): only email, LinkedIn, website, city, licence. Keep it at 2 pages: check `pdfinfo` after content changes.
 - Facts must match his CV. Name clients (ING) only with Haystack's permission.
 - When facts change, also update `public/llms.txt` and the JSON-LD in `Base.astro`.
 - Check before finishing: `npm run build` passes, and `grep -rn "\[" content` lists the placeholders still left.
