@@ -1,0 +1,18 @@
+---
+import { getContent } from '../lib/content';
+const { logos, ui, lang } = getContent(Astro.currentLocale);
+---
+<section class="logos" aria-label={ui.organisations}>
+  <div class="wrap">
+    <span class="meta">{logos.label}</span>
+    <ul>
+      {logos.items.map((o) => (
+        <li>
+          {o.logo
+            ? <img src={o.logo} alt={o.name} title={o.name} height={o.height || 32} loading="lazy" decoding="async" style={`height:calc(${o.height || 32}px * var(--logo-scale))`} />
+            : o.name}
+        </li>
+      ))}
+    </ul>
+  </div>
+</section>

@@ -1,0 +1,31 @@
+---
+import { getContent } from '../lib/content';
+const { work, ui, lang } = getContent(Astro.currentLocale);
+---
+<section class="section" id="work" aria-labelledby="work-title">
+  <div class="wrap" data-reveal>
+    <div class="sh">
+      <div><span class="eyebrow">{work.eyebrow}</span><h2 class="h2" id="work-title">{work.title}</h2></div>
+      {work.intro && <p>{work.intro}</p>}
+    </div>
+    <div class="grid">
+      {work.cases.map((c) => (
+        <article class="card case">
+          {c.image
+            ? <img src={c.image} alt="" loading="lazy" style="aspect-ratio:16/9;object-fit:cover;width:100%" />
+            : <div class="visual" aria-hidden="true">{c.placeholder}</div>}
+          <div class="card-body">
+            <span class="meta">{c.meta}</span>
+            <h3 class="h3">{c.title}</h3>
+            <dl class="qa">
+              <div><dt>{ui.caseLabels.question}</dt><dd>{c.question}</dd></div>
+              <div><dt>{ui.caseLabels.approach}</dt><dd>{c.approach}</dd></div>
+              <div><dt>{ui.caseLabels.outcome}</dt><dd>{c.outcome}</dd></div>
+            </dl>
+            <div class="tags">{c.tags.map((t) => <span class="tag">{t}</span>)}</div>
+          </div>
+        </article>
+      ))}
+    </div>
+  </div>
+</section>

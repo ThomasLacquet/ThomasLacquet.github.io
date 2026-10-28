@@ -1,0 +1,39 @@
+{
+  "eyebrow": "Opleiding",
+  "title": "Wat ik studeerde",
+  "layout": {
+    "spacing": "compact"
+  },
+  "items": [
+    {
+      "period": "feb 2026 — 2028 · bezig",
+      "title": "MSc Managementwetenschappen",
+      "school": "Open Universiteit",
+      "logo": "/logos/education/items/0/logo.webp",
+      "logoHeight": 52,
+      "text": "Evidence-based managementinzichten toepassen en evalueren in complexe organisaties.",
+      "bullets": []
+    },
+    {
+      "period": "sep 2019 — jun 2021 · magna cum laude",
+      "title": "Bachelor Bedrijfsmanagement, Data Driven Marketing",
+      "school": "UC Leuven-Limburg",
+      "logo": "/logos/education/items/1/logo.webp",
+      "logoHeight": 36,
+      "bullets": [
+        "Marktonderzoeksproject naar het effect van de Nutri-Score",
+        "Internationale handelsmissie naar Lissabon",
+        "Bachelorproef: “Een webinar als eerste stap van een digitale sales funnel”"
+      ]
+    },
+    {
+      "period": "sep 2020 — jan 2021 · Erasmus+",
+      "title": "Uitwisselingssemester, Finland",
+      "school": "LAB University of Applied Sciences",
+      "logo": "/logos/education/items/2/logo.webp",
+      "logoHeight": 30,
+      "text": "Presenteren en spreken in het openbaar, internationale marketing, interculturele samenwerking en leiderschap, SAP ERP-systemen.",
+      "bullets": []
+    }
+  ]
+}

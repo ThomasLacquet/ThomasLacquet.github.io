@@ -1,0 +1,35 @@
+# Thomas Lacquet
+
+> Research consultant at Haystack Consulting in Leuven, Belgium. Consumer and customer experience (CX) research for FMCG brands, service companies and banks.
+
+## Profile
+- Role: Research Consultant, Haystack Consulting (since January 2022)
+- Profile: quantitative researcher, experienced in hybrid research methodologies (quant + qual); member of the extended data science team
+- Location: Leuven area, Belgium
+- Sectors: FMCG, services, banking
+- Study types: product testing, concept testing, usage & attitude (U&A), segmentation, brand health tracking, NPS & customer experience, key driver analysis
+- Specialisms: consumer research, CX and NPS analysis, segmentation analysis, behavioural marketing
+- Runs market research projects end to end: kick-off, methodology, screener, questionnaire, fieldwork follow-up, analysis, insights
+- Member of Haystack's extended data science team: synthetic data, predictive modelling, coded dashboards, AI tools (Claude, ChatGPT, Gemini)
+- Recent assignment: CX data analyst at ING Belgium, CoE CX & Innovation (April–June 2026), analysing NPS at bank, channel, product and journey level
+- Tools: SPSS, R, Python, Stata, Displayr, Qlik Sense, Power BI
+- Languages: Dutch (C2), English (C1), French (B2), German (B1)
+
+## Teaching and speaking
+- Yearly guest lecture at UC Leuven-Limburg (UCLL), his former bachelor programme
+- Yearly guest lecture for master students at the University of Antwerp
+- Guest lecture at PXL
+- Speaker at the CUBE marketing network (2024): "Future-proofing our profession"
+
+## Education
+- MSc Management, Open Universiteit (2026–2028, in progress, part-time)
+- Bachelor of Business Management, Data Driven Marketing, UCLL (2019–2021, magna cum laude)
+- Erasmus+ exchange, LAB University of Applied Sciences, Finland (2020–2021)
+
+## Contact
+- Email: thomaslacquet@hotmail.com
+- LinkedIn: https://www.linkedin.com/in/thomas-lacquet/
+
+## Languages
+- English: https://thomaslacquet.github.io/
+- Nederlands (Dutch): https://thomaslacquet.github.io/nl/ — same profile in Dutch, for recruiters in Flanders. Speaks Dutch (native, C2), English (C1), French (B2), German (B1).

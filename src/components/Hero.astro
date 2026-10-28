@@ -1,0 +1,103 @@
+---
+import { getContent } from '../lib/content';
+const { settings, hero, ui, lang } = getContent(Astro.currentLocale);
+
+// Charts are separate image files in public/charts/, so their dummy numbers never end up in the page text (SEO).
+// Each rotating word gets the classic chart for that study type (matched on keywords, so renaming a word keeps working).
+const chartFor = (w: string) => {
+  const t = w.toLowerCase();
+  if (t.includes('segment')) return 'segment';
+  if (t.includes('product')) return 'product';
+  if (t.includes('concept')) return 'concept';
+  if (t.includes('u&a') || t.includes('usage')) return 'ua';
+  if (t.includes('nps') || t.includes('net promoter')) return 'nps';
+  if (t.includes('driver')) return 'kda';
+  if (t.includes('brand') || t.includes('track')) return 'track';
+  return '';
+};
+const bgMode = hero.layout?.background ?? 'charts';
+const wordCharts = hero.claimWords.map(chartFor);
+const usedCharts = bgMode === 'charts' ? [...new Set(wordCharts.filter((k) => k && k !== 'segment'))] : [];
+const firstChart = bgMode === 'charts' ? wordCharts[0] : 'segment';
+
+// Background: the CV drawn as a segmentation (faint clusters). Deterministic, so every build looks the same.
+const COLORS: Record<string, string> = { blue: '#1F5F99', ink: '#16202B', ochre: '#A8742A', green: '#5E7F68' };
+const SLOTS = [[210, 150], [470, 110], [480, 370], [215, 450]];
+let seed = 7;
+const rnd = () => { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; };
+const gauss = () => Math.sqrt(-2 * Math.log(rnd() || 1e-9)) * Math.cos(2 * Math.PI * rnd());
+const showBg = bgMode !== 'none';
+const clusters = (hero.segments ?? []).slice(0, 4).map((s: any, i: number) => {
+  const [cx, cy] = SLOTS[i];
+  const col = COLORS[s.color] ?? COLORS.blue;
+  const items = (s.items ?? []).slice(0, 4);
+  const dots = Array.from({ length: 30 }, () => ({ x: Math.round(cx + gauss() * 46), y: Math.round(cy + gauss() * 34), r: [2.5, 3, 3.5, 4][Math.floor(rnd() * 4)] }));
+  const nodes = items.map((it: any, j: number) => {
+    const a = -Math.PI / 2 + (j * 2 * Math.PI) / items.length + 0.4;
+    const r = items.length === 1 ? 0 : 34;
+    return { x: Math.round(cx + r * Math.cos(a) * 1.25), y: Math.round(cy + r * Math.sin(a)) };
+  });
+  return { name: s.name, n: items.length, cx, cy, col, dots, nodes };
+});
+---
+<section class="hero" data-space={hero.layout?.spacing} data-avatar={hero.layout?.avatarSize || 'm'} id="top" aria-labelledby="hero-title">
+  {showBg && (
+    <div class="hero-bg" data-mode={bgMode} aria-hidden="true">
+    {usedCharts.map((k) => (
+      <img class:list={['hb-chart', { on: firstChart === k }]} data-chart={k} src={`/charts/${k}.svg`} alt="" width="532" height="444" loading={firstChart === k ? 'eager' : 'lazy'} decoding="async" />
+    ))}
+    <svg class:list={['hb-chart', 'hb-seg', { on: firstChart === 'segment' }]} data-chart="segment" viewBox="0 0 640 580" preserveAspectRatio="xMaxYMid meet" focusable="false">
+      {clusters.map((c) => (
+        <g>
+          {c.dots.map((d) => <circle cx={d.x} cy={d.y} r={d.r} fill={c.col} opacity="0.13" />)}
+          <ellipse cx={c.cx} cy={c.cy} rx="112" ry="70" fill="none" stroke={c.col} stroke-dasharray="3 6" opacity="0.4" />
+          <path d={`M${c.cx - 6},${c.cy} H${c.cx + 6} M${c.cx},${c.cy - 6} V${c.cy + 6}`} stroke={c.col} stroke-width="1.5" opacity="0.5" />
+          <text class="hb-label" x={c.cx} y={c.cy - 82} text-anchor="middle" fill={c.col}>{c.name.toUpperCase()} · n={c.n}</text>
+          {c.nodes.map((n) => <circle cx={n.x} cy={n.y} r="7" fill={c.col} opacity="0.8" />)}
+        </g>
+      ))}
+    </svg>
+    </div>
+  )}
+  <div class="wrap">
+    <div class="hero-head">
+      {hero.photo && (
+        <div class="avatar">
+          <img src={hero.photo} width="179" height="159" alt={`${ui.portraitOf} ${settings.name}`} fetchpriority="high">
+        </div>
+      )}
+      <div class="hero-id">
+        <h1 id="hero-title">{settings.name}</h1>
+        <p class="hero-role">{hero.roleLine}</p>
+      </div>
+    </div>
+
+    <p class="lead">{hero.lead}</p>
+
+    <div class="claim">
+      <p class="claim-line">
+        {hero.claim}{' '}
+        <span class="rot" data-rotate={hero.claimWords.join('|')} data-charts={wordCharts.join('|')} aria-hidden="true">{hero.claimWords[0]}</span><span aria-hidden="true">.</span>
+        <span class="sr-only">{hero.claimWords.join(', ')}.</span>
+      </p>
+      {hero.metaLine?.length > 0 && (
+        <p class="claim-meta">
+          {hero.metaLine.map((m, i) => <span>{i > 0 && <span class="sep" aria-hidden="true">·</span>}{m}</span>)}
+        </p>
+      )}
+    </div>
+
+    <div class="hero-foot">
+      <div class="btns">
+        <a class="btn btn-primary btn-mail" href={`mailto:${settings.email}`}><svg class="ico-mail" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>{ui.emailMe}</a>
+        {settings.cv && <a class="btn" href={settings.cv} download>{ui.downloadCv}</a>}
+        <a class="btn-icon" href={settings.linkedin} rel="me" aria-label={ui.linkedinProfile} title="LinkedIn"><img src="/icons/linkedin.webp" width="48" height="48" alt=""></a>
+      </div>
+      {hero.tools?.length > 0 && (
+        <ul class="tools" aria-label={ui.tools}>
+          {hero.tools.map((t) => <li>{t}</li>)}
+        </ul>
+      )}
+    </div>
+  </div>
+</section>

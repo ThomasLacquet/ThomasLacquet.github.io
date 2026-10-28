@@ -1,0 +1,18 @@
+---
+import { getContent } from '../lib/content';
+const { settings, ui, lang } = getContent(Astro.currentLocale);
+const labels = ui.nav;
+const links = settings.sections.filter((s) => labels[s]);
+---
+<header class="nav">
+  <nav class="wrap" aria-label={ui.mainNav}>
+    <div class="nav-left">
+      <a class="brand" href="#top">{settings.name.toUpperCase()}</a>
+      <a class="lang-switch" href={ui.switchHref} hreflang={ui.switchLang} lang={ui.switchLang} aria-label={ui.switchLabel} title={ui.switchLabel}>{ui.switchShort}</a>
+    </div>
+    <ul>
+      {links.map((s) => <li><a href={`#${s}`}>{labels[s]}</a></li>)}
+      <li><a class="cta" href="#contact">{ui.contact} →</a></li>
+    </ul>
+  </nav>
+</header>

@@ -1,0 +1,20 @@
+---
+import { getContent } from '../lib/content';
+const { about, ui, lang } = getContent(Astro.currentLocale);
+const L = about.layout ?? {};
+---
+<section class="section about" data-space={L.spacing} id="about" aria-labelledby="about-title">
+  <div class="wrap" data-reveal>
+    <div class="sh"><div><span class="eyebrow">{about.eyebrow}</span><h2 class="h2" id="about-title">{about.title}</h2></div></div>
+    <div class="media-split" data-pos={L.photoPosition || 'right'} data-size={L.photoSize || 'm'} data-align={L.photoAlign || 'center'}>
+      <div class="stack media-text">
+        {about.paragraphs.map((p) => <p>{p}</p>)}
+      </div>
+      {about.photo && (
+        <figure class="media">
+          <img src={about.photo} width="900" height="840" loading="lazy" alt={about.photoAlt || ''} style={`object-position: 50% ${({ top: '0%', center: '50%', bottom: '100%' } as any)[L.photoFocus] ?? '50%'}`}>
+        </figure>
+      )}
+    </div>
+  </div>
+</section>

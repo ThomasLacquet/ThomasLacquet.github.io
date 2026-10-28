@@ -1,0 +1,90 @@
+{
+  "eyebrow": "Experience",
+  "title": "Where I've worked",
+  "layout": {
+    "spacing": "compact"
+  },
+  "haystack": {
+    "period": "Jan 2022 — present",
+    "title": "Research consultant",
+    "company": "Haystack Consulting · Leuven",
+    "logo": "/logos/experience/haystack/logo.webp",
+    "logoHeight": 30,
+    "intro": "Clients come with a question. My job is to get them a usable answer, from the first meeting to the final presentation. The method follows from the question.",
+    "steps": [
+      {
+        "name": "Kick-off",
+        "what": "pin down the business question"
+      },
+      {
+        "name": "Methodology",
+        "what": "pick the design that answers it"
+      },
+      {
+        "name": "Screener & questionnaire",
+        "what": "the right people, the right questions"
+      },
+      {
+        "name": "Fieldwork",
+        "what": "follow up until the sample is in"
+      },
+      {
+        "name": "Analysis",
+        "what": "SPSS, R, Python, Displayr"
+      },
+      {
+        "name": "Insights",
+        "what": "what the client should decide, and why"
+      }
+    ],
+    "note": "Sectors: FMCG, services and banking.",
+    "studyTypes": [
+      "Quantitative research",
+      "Hybrid research (quant + qual)",
+      "Product testing",
+      "Concept testing",
+      "Usage & Attitude (U&A)",
+      "Segmentation",
+      "Brand health tracking",
+      "NPS & customer experience",
+      "Key driver analysis"
+    ],
+    "panelLabel": "Extended data science team",
+    "panelTitle": "Testing where market research is heading",
+    "panelText": "Market research is changing fast. I look for new methods and check whether they hold up on real client projects, from synthetic data and predictive modelling to dashboards written in code.",
+    "panelTags": [
+      "Synthetic data",
+      "Predictive modelling",
+      "Coded dashboards"
+    ]
+  },
+  "jobs": [
+    {
+      "period": "Apr 2026 — Jun 2026",
+      "title": "CX data analyst",
+      "company": "ING Belgium · assignment via Haystack Consulting",
+      "logo": "/logos/experience/jobs/0/logo.webp",
+      "logoHeight": 24,
+      "text": "Part of the CoE CX & Innovation team. I analysed NPS data at bank, channel, product and journey level to feed into ING's customer experience strategy.",
+      "items": []
+    },
+    {
+      "period": "Jan 2021 — May 2021",
+      "title": "Student intern",
+      "company": "Talk to C · internship · Leuven",
+      "logo": "/logos/experience/jobs/1/logo.webp",
+      "logoHeight": 40,
+      "text": "Organised two webinars from start to finish and set up the email automation behind them. Analysed the data for insights and created content in Canva and Adobe Premiere Pro.",
+      "items": []
+    },
+    {
+      "period": "Aug 2019 — Aug 2020",
+      "title": "Marketing manager",
+      "company": "Academics for Technology (now NEXT) · Leuven",
+      "logo": "/logos/experience/jobs/2/logo.webp",
+      "logoHeight": 40,
+      "text": "Promoted events, workshops and trips, and Academics for Technology itself, through online and offline channels.",
+      "items": []
+    }
+  ]
+}

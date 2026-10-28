@@ -1,0 +1,86 @@
+{
+  "photo": "/img/hero/photo.webp",
+  "roleLine": "Research consultant · Leuven, België",
+  "lead": "Een datagedreven onderzoeker die consumentendata omzet in heldere inzichten waar je mee verder kunt. Ik ben kwantitatief onderzoeker, ook thuis in hybride designs (kwanti + kwali), en ik help klanten van businessvraag naar beslissing.",
+  "claim": "Ik help klanten beslissen met",
+  "claimWords": [
+    "producttests",
+    "concepttests",
+    "U&A-studies",
+    "segmentatie",
+    "brand health tracking",
+    "NPS-onderzoek",
+    "key driver analyse"
+  ],
+  "metaLine": [
+    "Bijna 5 jaar in marktonderzoek"
+  ],
+  "tools": [],
+  "layout": {
+    "spacing": "normal",
+    "avatarSize": "m",
+    "background": "charts"
+  },
+  "segments": [
+    {
+      "name": "Onderzoek",
+      "color": "blue",
+      "items": [
+        {
+          "name": "Haystack Consulting"
+        },
+        {
+          "name": "Talk to C"
+        }
+      ]
+    },
+    {
+      "name": "Data & CX",
+      "color": "ink",
+      "items": [
+        {
+          "name": "ING België"
+        },
+        {
+          "name": "Data science-team"
+        }
+      ]
+    },
+    {
+      "name": "Lesgeven",
+      "color": "ochre",
+      "items": [
+        {
+          "name": "UCLL"
+        },
+        {
+          "name": "UAntwerpen"
+        },
+        {
+          "name": "PXL"
+        },
+        {
+          "name": "CUBE"
+        }
+      ]
+    },
+    {
+      "name": "Business & mgmt",
+      "color": "green",
+      "items": [
+        {
+          "name": "NEXT"
+        },
+        {
+          "name": "Bachelor UCLL"
+        },
+        {
+          "name": "LAB Finland"
+        },
+        {
+          "name": "Open Universiteit"
+        }
+      ]
+    }
+  ]
+}

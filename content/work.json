@@ -1,0 +1,45 @@
+{
+  "eyebrow": "Selected work",
+  "title": "From question to decision",
+  "intro": "Client names and figures are left out or anonymised where projects are confidential.",
+  "cases": [
+    {
+      "meta": "Banking · 2026",
+      "title": "Reading NPS at every level of a bank",
+      "question": "Where in the customer experience do promoters turn into detractors?",
+      "approach": "Analysed NPS data at bank, channel, product and journey level for ING Belgium's CX & Innovation team.",
+      "outcome": "[WHAT CHANGED BECAUSE OF YOUR ANALYSIS]",
+      "tags": [
+        "NPS",
+        "Customer journey"
+      ],
+      "image": "",
+      "placeholder": "[CHART OR DASHBOARD SCREENSHOT]"
+    },
+    {
+      "meta": "[SECTOR, E.G. FMCG / RETAIL] · [YEAR]",
+      "title": "[PROJECT TITLE]",
+      "question": "[THE CLIENT'S BUSINESS QUESTION]",
+      "approach": "[STUDY DESIGN, SAMPLE, ANALYSIS]",
+      "outcome": "[DECISION OR RESULT]",
+      "tags": [
+        "Segmentation",
+        "Displayr"
+      ],
+      "image": "",
+      "placeholder": "[CHART OR REPORT PAGE]"
+    },
+    {
+      "meta": "Food labelling · UCLL",
+      "title": "Does the Nutri-Score change what people buy?",
+      "question": "What effect does the Nutri-Score have on consumers?",
+      "approach": "[METHOD AND SAMPLE]",
+      "outcome": "[KEY FINDING]",
+      "tags": [
+        "Consumer research"
+      ],
+      "image": "",
+      "placeholder": "[CHART OR SURVEY VISUAL]"
+    }
+  ]
+}

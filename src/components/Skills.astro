@@ -1,0 +1,43 @@
+---
+import { getContent } from '../lib/content';
+const { skills: sk, ui, lang } = getContent(Astro.currentLocale);
+// CEFR level → plain-English label
+const words = ui.levels;
+---
+<section class="section" data-space={sk.layout?.spacing} id="skills" aria-labelledby="skills-title">
+  <div class="wrap" data-reveal>
+    <div class="sh">
+      <div><span class="eyebrow">{sk.eyebrow}</span><h2 class="h2" id="skills-title">{sk.title}</h2></div>
+    </div>
+    <div class="split">
+      <div style="display:grid;gap:28px">
+        {sk.tools.length > 0 && (
+          <div>
+            <h3 class="label">{ui.skillLabels.analysis}</h3>
+            <div class="chips">{sk.tools.map((t) => <span class="chip">{t}</span>)}</div>
+          </div>
+        )}
+        {sk.ai.length > 0 && (
+          <div>
+            <h3 class="label">{ui.skillLabels.ai}</h3>
+            <div class="chips">{sk.ai.map((t) => <span class="chip">{t}</span>)}</div>
+          </div>
+        )}
+        {sk.also.length > 0 && (
+          <div>
+            <h3 class="label">{ui.skillLabels.also}</h3>
+            <ul class="list">{sk.also.map((a) => <li>{a}</li>)}</ul>
+          </div>
+        )}
+      </div>
+      <div style="display:grid;gap:12px;align-content:start">
+        <h3 class="label">{ui.skillLabels.languages}</h3>
+        <ul class="langs">
+          {sk.languages.map((l) => (
+            <li><span>{l.name}</span><span class="lvl" title={`CEFR ${l.level}`}>{l.level}</span><span class="lvl-word">{words[l.level] ?? ''}</span></li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>

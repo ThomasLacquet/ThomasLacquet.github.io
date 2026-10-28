@@ -1,0 +1,46 @@
+{
+  "eyebrow": "Speaking & teaching",
+  "title": "In front of the class",
+  "layout": {
+    "spacing": "compact",
+    "photoPosition": "left",
+    "photoSize": "m",
+    "photoAlign": "top",
+    "photoFocus": "center"
+  },
+  "intro": "Every year I go back to the classroom to show students how market research works outside the textbook.",
+  "photo": "/img/speaking/photo.webp",
+  "photoAlt": "Thomas giving a guest lecture in a university lecture hall, with a colleague beside him",
+  "photoCaption": "Guest lecture at the University of Antwerp, 2026",
+  "talks": [
+    {
+      "title": "UCLL · back where I studied",
+      "text": "Each year I return to UCLL to show Marketing students what the work looks like after graduation. I lecture on specific methodologies like segmentation analysis, and on the current state and future of market research.",
+      "badge": "Yearly",
+      "logo": "/logos/speaking/talks/0/logo.webp",
+      "logoHeight": 32
+    },
+    {
+      "title": "University of Antwerp · master students",
+      "text": "A yearly guest lecture for master students on market research in general, built around real client cases.",
+      "badge": "Yearly",
+      "logo": "/logos/speaking/talks/1/logo.webp",
+      "logoHeight": 32
+    },
+    {
+      "title": "CUBE marketing network",
+      "text": "Talk as a young professional: Future-proofing our profession. Could market research still predict a breakthrough like the car?",
+      "badge": "2024",
+      "logo": "/logos/speaking/talks/2/logo.webp",
+      "logoHeight": 26,
+      "image": "/img/speaking/talks/2/image.webp"
+    },
+    {
+      "title": "PXL",
+      "text": "Guest lecture on market research in general.",
+      "badge": "2023",
+      "logo": "/logos/speaking/talks/3/logo.webp",
+      "logoHeight": 40
+    }
+  ]
+}

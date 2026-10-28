@@ -1,0 +1,17 @@
+{
+  "eyebrow": "Over mij",
+  "title": "Buiten het werk",
+  "paragraphs": [
+    "Ik blijf graag in beweging: basketbal, boulderen, en skiën als het seizoen het toelaat.",
+    "Meestal ben ik degene die dingen organiseert, van een weekend in de Ardennen tot een barbecue in de tuin. Tijd met vrienden en mijn vriendin geeft me energie, en als ik even alleen wil zijn, neem ik mijn gitaar."
+  ],
+  "photo": "/img/about/photo.webp",
+  "photoAlt": "Thomas ligt in de sneeuw naast zijn ski’s, met zonnige Alpenpistes achter hem",
+  "layout": {
+    "spacing": "normal",
+    "photoPosition": "right",
+    "photoSize": "m",
+    "photoAlign": "center",
+    "photoFocus": "center"
+  }
+}

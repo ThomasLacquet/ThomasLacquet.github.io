@@ -1,0 +1,47 @@
+{
+  "eyebrow": "Vaardigheden",
+  "title": "Tools & talen",
+  "tools": [
+    "SPSS",
+    "R",
+    "Python",
+    "Stata",
+    "Displayr",
+    "Power BI",
+    "Qlik Sense"
+  ],
+  "ai": [
+    "Claude",
+    "ChatGPT",
+    "Gemini",
+    "Synthetische data",
+    "Predictive modelling",
+    "Dashboards in code"
+  ],
+  "also": [
+    "Resultaten uitleggen aan mensen die niet dagelijks in de data zitten",
+    "Plannen en organiseren, en manieren zoeken om het werk zelf efficiënter te maken",
+    "Digitale marketing"
+  ],
+  "languages": [
+    {
+      "name": "Nederlands",
+      "level": "C2"
+    },
+    {
+      "name": "Engels",
+      "level": "C1"
+    },
+    {
+      "name": "Frans",
+      "level": "B2"
+    },
+    {
+      "name": "Duits",
+      "level": "B1"
+    }
+  ],
+  "layout": {
+    "spacing": "normal"
+  }
+}

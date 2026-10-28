@@ -1,0 +1,30 @@
+---
+// The order and visibility of sections comes from content/settings.json
+// (editor: Settings, order & SEO → "Sections on the page").
+import Base from '../layouts/Base.astro';
+import Nav from './Nav.astro';
+import Hero from './Hero.astro';
+import Logos from './Logos.astro';
+import Experience from './Experience.astro';
+import Work from './Work.astro';
+import Speaking from './Speaking.astro';
+import Education from './Education.astro';
+import Skills from './Skills.astro';
+import About from './About.astro';
+import Contact from './Contact.astro';
+import StickyContact from './StickyContact.astro';
+import { getContent } from '../lib/content';
+const { settings } = getContent(Astro.currentLocale);
+
+const sections: Record<string, any> = { logos: Logos, experience: Experience, work: Work, speaking: Speaking, education: Education, skills: Skills, about: About };
+const order = settings.sections.filter((s) => sections[s]);
+---
+<Base>
+  <Nav />
+  <main id="main">
+    <Hero />
+    {order.map((s) => { const Section = sections[s]; return <Section />; })}
+  </main>
+  <Contact />
+  <StickyContact />
+</Base>

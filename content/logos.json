@@ -1,0 +1,35 @@
+{
+  "label": "Worked with · taught at · studied at",
+  "items": [
+    {
+      "name": "Haystack Consulting",
+      "logo": "/logos/strip/items/0/logo.webp",
+      "height": 34
+    },
+    {
+      "name": "ING Belgium",
+      "logo": "/logos/strip/items/1/logo.webp",
+      "height": 26
+    },
+    {
+      "name": "UCLL",
+      "logo": "/logos/strip/items/2/logo.webp",
+      "height": 36
+    },
+    {
+      "name": "University of Antwerp",
+      "logo": "/logos/strip/items/3/logo.webp",
+      "height": 32
+    },
+    {
+      "name": "Open Universiteit",
+      "logo": "/logos/strip/items/4/logo.webp",
+      "height": 44
+    },
+    {
+      "name": "LAB University of Applied Sciences",
+      "logo": "/logos/strip/items/5/logo.webp",
+      "height": 32
+    }
+  ]
+}

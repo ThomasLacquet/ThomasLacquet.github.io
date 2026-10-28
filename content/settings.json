@@ -1,0 +1,19 @@
+{
+  "name": "Thomas Lacquet",
+  "role": "Research Consultant",
+  "employer": "Haystack Consulting",
+  "location": "Leuven, Belgium",
+  "email": "thomaslacquet@hotmail.com",
+  "linkedin": "https://www.linkedin.com/in/thomas-lacquet/",
+  "cv": "",
+  "accent": "#1F5F99",
+  "sections": [
+    "experience",
+    "speaking",
+    "education",
+    "skills",
+    "about"
+  ],
+  "seoTitle": "Thomas Lacquet · Research Consultant, Leuven",
+  "seoDescription": "Thomas Lacquet is a research consultant at Haystack Consulting in Leuven, Belgium. Consumer and CX research for FMCG, services and banking: segmentation, NPS analysis, SPSS, R, Python and Power BI."
+}

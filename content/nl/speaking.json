@@ -1,0 +1,46 @@
+{
+  "eyebrow": "Spreken & lesgeven",
+  "title": "Voor de klas",
+  "layout": {
+    "spacing": "compact",
+    "photoPosition": "left",
+    "photoSize": "m",
+    "photoAlign": "top",
+    "photoFocus": "center"
+  },
+  "intro": "Elk jaar ga ik terug naar de klas om studenten te tonen hoe marktonderzoek werkt buiten het handboek.",
+  "photo": "/img/speaking/photo.webp",
+  "photoAlt": "Thomas geeft een gastcollege in een universitaire aula, met een collega naast hem",
+  "photoCaption": "Gastcollege aan de Universiteit Antwerpen, 2026",
+  "talks": [
+    {
+      "title": "UCLL · terug waar ik studeerde",
+      "text": "Elk jaar keer ik terug naar UCLL om marketingstudenten te tonen hoe het werk eruitziet na hun diploma. Ik geef les over specifieke methodes zoals segmentatieanalyse, en over de huidige stand en de toekomst van marktonderzoek.",
+      "badge": "Jaarlijks",
+      "logo": "/logos/speaking/talks/0/logo.webp",
+      "logoHeight": 32
+    },
+    {
+      "title": "Universiteit Antwerpen · masterstudenten",
+      "text": "Een jaarlijks gastcollege voor masterstudenten over marktonderzoek in het algemeen, opgebouwd rond echte klantcases.",
+      "badge": "Jaarlijks",
+      "logo": "/logos/speaking/talks/1/logo.webp",
+      "logoHeight": 32
+    },
+    {
+      "title": "CUBE marketingnetwerk",
+      "text": "Talk als young professional: Future-proofing our profession. Kon marktonderzoek een doorbraak als de auto nog voorspellen?",
+      "badge": "2024",
+      "logo": "/logos/speaking/talks/2/logo.webp",
+      "logoHeight": 26,
+      "image": "/img/speaking/talks/2/image.webp"
+    },
+    {
+      "title": "PXL",
+      "text": "Gastcollege over marktonderzoek in het algemeen.",
+      "badge": "2023",
+      "logo": "/logos/speaking/talks/3/logo.webp",
+      "logoHeight": 40
+    }
+  ]
+}

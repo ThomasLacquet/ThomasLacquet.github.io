@@ -1,0 +1,86 @@
+{
+  "photo": "/img/hero/photo.webp",
+  "roleLine": "Research consultant · Leuven, Belgium",
+  "lead": "A data-driven researcher who turns consumer data into clear, actionable insights. I'm a quantitative researcher, also at home in hybrid quant + qual designs, and I help clients go from business question to decision.",
+  "claim": "I help clients decide with",
+  "claimWords": [
+    "product tests",
+    "concept tests",
+    "U&A studies",
+    "segmentation",
+    "brand health tracking",
+    "NPS research",
+    "key driver analysis"
+  ],
+  "metaLine": [
+    "Nearly 5 years in market research"
+  ],
+  "tools": [],
+  "layout": {
+    "spacing": "normal",
+    "avatarSize": "m",
+    "background": "charts"
+  },
+  "segments": [
+    {
+      "name": "Research",
+      "color": "blue",
+      "items": [
+        {
+          "name": "Haystack Consulting"
+        },
+        {
+          "name": "Talk to C"
+        }
+      ]
+    },
+    {
+      "name": "Data & CX",
+      "color": "ink",
+      "items": [
+        {
+          "name": "ING Belgium"
+        },
+        {
+          "name": "Data science team"
+        }
+      ]
+    },
+    {
+      "name": "Teaching",
+      "color": "ochre",
+      "items": [
+        {
+          "name": "UCLL"
+        },
+        {
+          "name": "UAntwerp"
+        },
+        {
+          "name": "PXL"
+        },
+        {
+          "name": "CUBE"
+        }
+      ]
+    },
+    {
+      "name": "Business & mgmt",
+      "color": "green",
+      "items": [
+        {
+          "name": "NEXT"
+        },
+        {
+          "name": "UCLL bachelor"
+        },
+        {
+          "name": "LAB Finland"
+        },
+        {
+          "name": "Open Universiteit"
+        }
+      ]
+    }
+  ]
+}

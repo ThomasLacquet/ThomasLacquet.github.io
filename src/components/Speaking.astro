@@ -1,0 +1,40 @@
+---
+import { getContent } from '../lib/content';
+const { speaking: s, ui, lang } = getContent(Astro.currentLocale);
+const L = s.layout ?? {};
+// A badge that is a year or a [PLACEHOLDER] shows as plain text, anything else as a dark pill.
+const talks = s.talks.map((t) => ({ ...t, pill: !!t.badge && !/^\d{4}$/.test(t.badge) && !t.badge.startsWith('[') }));
+---
+<section class="section" data-space={L.spacing} id="speaking" aria-labelledby="speak-title">
+  <div class="wrap" data-reveal>
+    <div class="sh">
+      <div><span class="eyebrow">{s.eyebrow}</span><h2 class="h2" id="speak-title">{s.title}</h2></div>
+      {s.intro && <p>{s.intro}</p>}
+    </div>
+
+    <div class="media-split" data-pos={L.photoPosition || 'left'} data-size={L.photoSize || 'm'} data-align={L.photoAlign || 'top'}>
+      {s.photo && (
+        <figure class="photo media">
+          <img src={s.photo} width="610" height="376" loading="lazy" alt={s.photoAlt} style={`object-position: 50% ${({ top: '0%', center: '50%', bottom: '100%' } as any)[L.photoFocus] ?? '50%'}`}>
+          {s.photoCaption && <figcaption class="meta">{s.photoCaption}</figcaption>}
+        </figure>
+      )}
+
+      <div class="rows media-text">
+        {talks.map((t) => (
+          <div class="row">
+            <div class="row-logo">
+              {t.logo && <img src={t.logo} alt="" style={`height:${t.logoHeight || 30}px`} loading="lazy">}
+              {t.badge && (t.pill ? <span class="pill">{t.badge}</span> : <span class="meta">{t.badge}</span>)}
+            </div>
+            <div>
+              <h3>{t.title}</h3>
+              <p>{t.text}</p>
+              {t.image && <img src={t.image} width="640" height="360" loading="lazy" alt={t.title}>}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,129 @@
+---
+import '../styles/global.css';
+import { getContent } from '../lib/content';
+const { settings: site, ui, lang } = getContent(Astro.currentLocale);
+
+const enUrl = new URL('/', Astro.site).href;
+const nlUrl = new URL('/nl/', Astro.site).href;
+const url = lang === 'nl' ? nlUrl : enUrl;
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@type': 'ProfilePage',
+  url,
+  inLanguage: lang,
+  mainEntity: {
+    '@type': 'Person',
+    '@id': `${enUrl}#thomas`,
+    name: site.name,
+    jobTitle: site.role,
+    description: ui.personDescription,
+    url: enUrl,
+    image: new URL('/img/portrait.png', Astro.site).href,
+    worksFor: { '@type': 'Organization', name: site.employer },
+    address: { '@type': 'PostalAddress', addressLocality: 'Leuven', addressCountry: 'BE' },
+    alumniOf: [
+      { '@type': 'CollegeOrUniversity', name: 'UC Leuven-Limburg (UCLL)' },
+      { '@type': 'CollegeOrUniversity', name: 'LAB University of Applied Sciences' },
+    ],
+    knowsAbout: [
+      'Market research', 'Quantitative research', 'Hybrid research methodologies', 'Mixed methods research', 'Consumer research', 'Customer experience (CX)', 'Net Promoter Score (NPS)',
+      'Segmentation analysis', 'Behavioural marketing', 'FMCG', 'Services', 'Banking', 'Product testing', 'Concept testing', 'Usage and attitude (U&A) research', 'Brand health tracking', 'Key driver analysis', 'Survey research',
+      'SPSS', 'R', 'Python', 'Stata', 'Displayr', 'Qlik Sense', 'Power BI',
+      'Questionnaire design', 'Fieldwork management', 'Synthetic data', 'Predictive modelling', 'Dashboard development', 'AI tools in market research',
+    ],
+    knowsLanguage: ['nl', 'en', 'fr', 'de'],
+    sameAs: [site.linkedin],
+  },
+};
+---
+<!doctype html>
+<html lang={lang} style={`--accent:${site.accent || '#1F5F99'}`}>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{site.seoTitle}</title>
+<meta name="description" content={site.seoDescription}>
+<meta name="author" content={site.name}>
+<meta name="robots" content="index, follow, max-image-preview:large">
+<link rel="canonical" href={url}>
+<link rel="alternate" hreflang="en" href={enUrl}>
+<link rel="alternate" hreflang="nl" href={nlUrl}>
+<link rel="alternate" hreflang="x-default" href={enUrl}>
+<meta name="theme-color" content="#F4F3EF">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<meta property="og:type" content="profile">
+<meta property="og:title" content={`${site.name} · ${site.role}`}>
+<meta property="og:description" content={ui.ogDescription}>
+<meta property="og:locale" content={ui.ogLocale}>
+<meta property="og:locale:alternate" content={lang === 'nl' ? 'en_BE' : 'nl_BE'}>
+<meta property="og:url" content={url}>
+<meta property="og:image" content={new URL('/og-image.jpg', Astro.site).href}>
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="profile:first_name" content="Thomas">
+<meta property="profile:last_name" content="Lacquet">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="preload" href="/fonts/archivo-latin-800-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/ibm-plex-sans-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
+</head>
+<body>
+<a class="skip" href="#main">{ui.skip}</a>
+<slot />
+<script is:inline>
+(function () {
+  // Sticky contact bar: appears once the hero buttons scroll away, hides at the contact section
+  var bar = document.querySelector('[data-sticky]');
+  if (bar && 'IntersectionObserver' in window) {
+    var heroOut = false, contactIn = false;
+    var upd = function () { bar.classList.toggle('show', heroOut && !contactIn); };
+    var hb = document.querySelector('.hero .btns'), ct = document.getElementById('contact');
+    if (hb) new IntersectionObserver(function (e) { heroOut = !e[0].isIntersecting && e[0].boundingClientRect.top < 0; upd(); }).observe(hb);
+    if (ct) new IntersectionObserver(function (e) { contactIn = e[0].isIntersecting; upd(); }, { threshold: 0.1 }).observe(ct);
+  }
+})();
+(function () {
+  var d = document.documentElement;
+  var reduce = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduce || !('IntersectionObserver' in window)) return;
+  d.classList.add('js-motion');
+
+  // Sections fade in as they scroll into view
+  var io = new IntersectionObserver(function (es) {
+    es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('[data-reveal]').forEach(function (el) { io.observe(el); });
+
+  // Rotating word in the hero claim
+  var w = document.querySelector('[data-rotate]');
+  if (w) {
+    var words = w.getAttribute('data-rotate').split('|'), i = 0;
+    var charts = (w.getAttribute('data-charts') || '').split('|');
+    var bg = document.querySelector('.hero-bg[data-mode="charts"]');
+    var show = function (k) {
+      if (!bg || !k) return;
+      bg.querySelectorAll('.hb-chart').forEach(function (c) { c.classList.toggle('on', c.getAttribute('data-chart') === k); });
+    };
+    setInterval(function () {
+      w.classList.add('out');
+      setTimeout(function () { i = (i + 1) % words.length; w.textContent = words[i]; w.classList.remove('out'); show(charts[i]); }, 350);
+    }, 3200);
+  }
+
+  // Experience timeline fills as you scroll
+  var t = document.querySelector('[data-timeline]');
+  if (t) {
+    var tick = false;
+    var draw = function () {
+      var r = t.getBoundingClientRect();
+      var p = Math.max(0, Math.min(1, (innerHeight * 0.65 - r.top) / Math.max(r.height, 1)));
+      t.style.setProperty('--progress', p.toFixed(3));
+      tick = false;
+    };
+    addEventListener('scroll', function () { if (!tick) { tick = true; requestAnimationFrame(draw); } }, { passive: true });
+    draw();
+  }
+})();
+</script>
+</body>
+</html>

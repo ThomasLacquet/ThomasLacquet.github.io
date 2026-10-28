@@ -1,0 +1,47 @@
+{
+  "eyebrow": "Skills",
+  "title": "Tools & languages",
+  "tools": [
+    "SPSS",
+    "R",
+    "Python",
+    "Stata",
+    "Displayr",
+    "Power BI",
+    "Qlik Sense"
+  ],
+  "ai": [
+    "Claude",
+    "ChatGPT",
+    "Gemini",
+    "Synthetic data",
+    "Predictive modelling",
+    "Coded dashboards"
+  ],
+  "also": [
+    "Presenting results to people who don't live in the data",
+    "Planning and organising, and finding ways to make the work itself more efficient",
+    "Digital marketing"
+  ],
+  "languages": [
+    {
+      "name": "Dutch",
+      "level": "C2"
+    },
+    {
+      "name": "English",
+      "level": "C1"
+    },
+    {
+      "name": "French",
+      "level": "B2"
+    },
+    {
+      "name": "German",
+      "level": "B1"
+    }
+  ],
+  "layout": {
+    "spacing": "normal"
+  }
+}

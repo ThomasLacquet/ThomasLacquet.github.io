@@ -1,0 +1,21 @@
+{
+  "name": "thomas-lacquet-site",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview"
+  },
+  "dependencies": {
+    "astro": "~5.18.2",
+    "@astrojs/react": "~4.4.2",
+    "@keystatic/astro": "~5.2.0",
+    "@keystatic/core": "~0.6.9",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "engines": {
+    "node": ">=20.19.0"
+  }
+}

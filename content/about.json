@@ -1,0 +1,17 @@
+{
+  "eyebrow": "About",
+  "title": "Out of office",
+  "paragraphs": [
+    "I like to keep moving: basketball, bouldering, skiing when the season allows.",
+    "I'm usually the one organising things, from a weekend in the Ardennes to a barbecue in the garden. Time with friends and my girlfriend recharges me, and when I want to be alone, I pick up the guitar."
+  ],
+  "photo": "/img/about/photo.webp",
+  "photoAlt": "Thomas lying in the snow next to his skis, with sunny Alpine slopes behind him",
+  "layout": {
+    "spacing": "normal",
+    "photoPosition": "right",
+    "photoSize": "m",
+    "photoAlign": "center",
+    "photoFocus": "center"
+  }
+}

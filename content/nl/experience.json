@@ -1,0 +1,90 @@
+{
+  "eyebrow": "Ervaring",
+  "title": "Waar ik gewerkt heb",
+  "layout": {
+    "spacing": "compact"
+  },
+  "haystack": {
+    "period": "jan 2022 — heden",
+    "title": "Research consultant",
+    "company": "Haystack Consulting · Leuven",
+    "logo": "/logos/experience/haystack/logo.webp",
+    "logoHeight": 30,
+    "intro": "Klanten komen met een vraag. Mijn job is hen een bruikbaar antwoord geven, van de eerste meeting tot de eindpresentatie. De methode volgt uit de vraag.",
+    "steps": [
+      {
+        "name": "Kick-off",
+        "what": "de businessvraag scherpstellen"
+      },
+      {
+        "name": "Methodologie",
+        "what": "het design kiezen dat de vraag beantwoordt"
+      },
+      {
+        "name": "Screener & vragenlijst",
+        "what": "de juiste mensen, de juiste vragen"
+      },
+      {
+        "name": "Veldwerk",
+        "what": "opvolgen tot de steekproef binnen is"
+      },
+      {
+        "name": "Analyse",
+        "what": "SPSS, R, Python, Displayr"
+      },
+      {
+        "name": "Inzichten",
+        "what": "wat de klant moet beslissen, en waarom"
+      }
+    ],
+    "note": "Sectoren: FMCG, diensten en banken.",
+    "studyTypes": [
+      "Kwantitatief onderzoek",
+      "Hybride onderzoek (kwanti + kwali)",
+      "Producttests",
+      "Concepttests",
+      "Usage & Attitude (U&A)",
+      "Segmentatie",
+      "Brand health tracking",
+      "NPS & klantervaring",
+      "Key driver analyse"
+    ],
+    "panelLabel": "Extended data science-team",
+    "panelTitle": "Testen waar marktonderzoek naartoe gaat",
+    "panelText": "Marktonderzoek verandert snel. Ik zoek nieuwe methodes en test of ze standhouden in echte klantprojecten, van synthetische data en predictive modelling tot dashboards in code.",
+    "panelTags": [
+      "Synthetische data",
+      "Predictive modelling",
+      "Dashboards in code"
+    ]
+  },
+  "jobs": [
+    {
+      "period": "apr 2026 — jun 2026",
+      "title": "CX data analyst",
+      "company": "ING België · opdracht via Haystack Consulting",
+      "logo": "/logos/experience/jobs/0/logo.webp",
+      "logoHeight": 24,
+      "text": "Deel van het CoE CX & Innovation-team. Ik analyseerde NPS-data op het niveau van bank, kanaal, product en klantreis, als input voor de klantervaringsstrategie van ING.",
+      "items": []
+    },
+    {
+      "period": "jan 2021 — mei 2021",
+      "title": "Stagiair",
+      "company": "Talk to C · stage · Leuven",
+      "logo": "/logos/experience/jobs/1/logo.webp",
+      "logoHeight": 40,
+      "text": "Organiseerde twee webinars van begin tot eind en zette de e-mailautomatisatie erachter op. Analyseerde de data op inzichten en maakte content in Canva en Adobe Premiere Pro.",
+      "items": []
+    },
+    {
+      "period": "aug 2019 — aug 2020",
+      "title": "Marketing manager",
+      "company": "Academics for Technology (nu NEXT) · Leuven",
+      "logo": "/logos/experience/jobs/2/logo.webp",
+      "logoHeight": 40,
+      "text": "Promootte evenementen, workshops en reizen, en Academics for Technology zelf, via online en offline kanalen.",
+      "items": []
+    }
+  ]
+}

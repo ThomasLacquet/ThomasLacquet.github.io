@@ -1,0 +1,19 @@
+---
+import { getContent } from '../lib/content';
+const { settings, contact, ui, lang } = getContent(Astro.currentLocale);
+---
+<footer class="contact" data-space={contact.layout?.spacing} id="contact" aria-labelledby="contact-title">
+  <div class="wrap">
+    <div>
+      <span class="eyebrow">{contact.eyebrow}</span>
+      <h2 id="contact-title">{contact.title}</h2>
+      <p>{contact.text}</p>
+    </div>
+    <div class="links">
+      <a class="primary" href={`mailto:${settings.email}`}><span class="li-label"><svg class="ico-mail" viewBox="0 0 24 24" width="22" height="22" aria-hidden="true" focusable="false"><rect x="3" y="5" width="18" height="14" rx="2" fill="none" stroke="currentColor" stroke-width="2"/><path d="m4 7 8 6 8-6" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>{settings.email}</span> <span aria-hidden="true">→</span></a>
+      <a href={settings.linkedin} rel="me"><span class="li-label"><img src="/icons/linkedin.webp" width="24" height="24" alt="">LinkedIn</span> <span aria-hidden="true">→</span></a>
+      {settings.cv && <a href={settings.cv} download>{ui.downloadCv} <span aria-hidden="true">↓</span></a>}
+    </div>
+  </div>
+  <div class="foot"><p>© {new Date().getFullYear()} {settings.name}</p></div>
+</footer>

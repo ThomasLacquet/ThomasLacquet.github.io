@@ -1,0 +1,45 @@
+{
+  "eyebrow": "Selectie van projecten",
+  "title": "Van vraag naar beslissing",
+  "intro": "Klantnamen en cijfers laat ik weg of anonimiseer ik wanneer projecten vertrouwelijk zijn.",
+  "cases": [
+    {
+      "meta": "Bankwezen · 2026",
+      "title": "NPS lezen op elk niveau van een bank",
+      "question": "Waar in de klantervaring worden promoters detractors?",
+      "approach": "NPS-data geanalyseerd op het niveau van bank, kanaal, product en klantreis voor het CX & Innovation-team van ING België.",
+      "outcome": "[WHAT CHANGED BECAUSE OF YOUR ANALYSIS]",
+      "tags": [
+        "NPS",
+        "Klantreis"
+      ],
+      "image": "",
+      "placeholder": "[CHART OR DASHBOARD SCREENSHOT]"
+    },
+    {
+      "meta": "[SECTOR, E.G. FMCG / RETAIL] · [YEAR]",
+      "title": "[PROJECT TITLE]",
+      "question": "[THE CLIENT'S BUSINESS QUESTION]",
+      "approach": "[STUDY DESIGN, SAMPLE, ANALYSIS]",
+      "outcome": "[DECISION OR RESULT]",
+      "tags": [
+        "Segmentation",
+        "Displayr"
+      ],
+      "image": "",
+      "placeholder": "[CHART OR REPORT PAGE]"
+    },
+    {
+      "meta": "Voedingslabels · UCLL",
+      "title": "Verandert de Nutri-Score wat mensen kopen?",
+      "question": "Welk effect heeft de Nutri-Score op consumenten?",
+      "approach": "[METHOD AND SAMPLE]",
+      "outcome": "[KEY FINDING]",
+      "tags": [
+        "Consumentenonderzoek"
+      ],
+      "image": "",
+      "placeholder": "[CHART OR SURVEY VISUAL]"
+    }
+  ]
+}
