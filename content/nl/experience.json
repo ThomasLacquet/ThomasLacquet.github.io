@@ -50,13 +50,14 @@
       "Key driver analyse"
     ],
     "panelLabel": "Data science- en innovatieteam",
-    "panelTitle": "Snellere processen, nieuwere methodes",
-    "panelText": "In dit team maken we onze interne processen efficiënter en volgen we nieuwe methodes in onderzoek op de voet, zoals predictive modelling en synthetische data. Zelf gebruik ik automatische dashboards in R en Displayr, en AI-tools in mijn dagelijkse werk.",
+    "panelTitle": "Een oog op wat komt",
+    "panelText": "In dit team blijf ik bij met de nieuwste innovaties in marktonderzoek en volg ik waar het vak naartoe gaat: synthetische data, sample boosts, virtual audiences, predictive modelling. We zoeken ook manieren om onze interne processen efficiënter te maken. In mijn eigen werk gebruik ik automatische dashboards in R en Displayr, en AI-tools.",
     "panelTags": [
       "Automatische dashboards → minder handwerk",
       "AI-tools → snellere workflows",
-      "Op de voet gevolgd: predictive modelling",
-      "Op de voet gevolgd: synthetische data"
+      "Op onze radar: synthetische data & boosts",
+      "Op onze radar: virtual audiences",
+      "Op onze radar: predictive modelling"
     ]
   },
   "jobs": [

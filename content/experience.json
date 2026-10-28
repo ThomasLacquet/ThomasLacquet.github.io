@@ -50,13 +50,14 @@
       "Key driver analysis"
     ],
     "panelLabel": "Data science & innovation team",
-    "panelTitle": "Faster processes, newer methods",
-    "panelText": "In this team we make our internal processes more efficient and stay on top of new methods in research, such as predictive modelling and synthetic data. What I use myself: automatic dashboards in R and Displayr, and AI tools in my daily work.",
+    "panelTitle": "Keeping an eye on what comes next",
+    "panelText": "In this team I keep up with the latest innovations in market research and watch where the field is heading: synthetic data, sample boosts, virtual audiences, predictive modelling. We also look for ways to make our internal processes more efficient. In my own work I use automatic dashboards in R and Displayr, and AI tools.",
     "panelTags": [
       "Automatic dashboards → less manual work",
       "AI tools → faster workflows",
-      "Keeping track of: predictive modelling",
-      "Keeping track of: synthetic data"
+      "On our radar: synthetic data & boosts",
+      "On our radar: virtual audiences",
+      "On our radar: predictive modelling"
     ]
   },
   "jobs": [
